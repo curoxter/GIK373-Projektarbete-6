@@ -29,20 +29,72 @@ Papa.parse('data_animal.csv', {
   header: true,
   complete: function(results) {
     const firstRow = results.data[0];
-    console.log("📌 Kolumnnamn:", Object.keys(firstRow));
+    console.log(" Kolumnnamn:", Object.keys(firstRow));
   }
 }); */
  
  
-   download: true,
+  download: true,
   header: true,
   complete: function(results) {
-    const data = results.data;
+    const allData = results.data;
 
-    // 2. Räkna antal förekomster per art (ScientificName)
+    const animaliaData = allData.filter(row => row.kingdom === 'Animalia');
+
+    console.log("✅ Antal rader med kingdom = Animalia:", animaliaData.length);
+    console.log(animaliaData);
+
+        // 3. Exempel: räkna arter inom Animalia
+    const counts = {};
+    animaliaData.forEach(row => {
+      const name = row.species || 'Okänd';
+      if (!counts[name]) {
+        counts[name] = 1;
+      } else {
+        counts[name]++;
+      }
+    });
+
+    // 4. Förbered för diagram
+    const labels = Object.keys(counts);
+    const values = Object.values(counts);
+
+    const ctx = document.getElementById('chart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels.slice(0, 20),
+        datasets: [{
+          label: 'Antal förekomster (Animalia)',
+          data: values.slice(0, 20),
+          backgroundColor: 'rgba(75, 192, 192, 0.6)'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            ticks: {
+              autoSkip: false,
+              maxRotation: 45,
+              minRotation: 45
+            }
+          },
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+});
+    
+ 
+
+  /*   // 2. Räkna antal förekomster per art (ScientificName)
     const counts = {};
     data.forEach(row => {
-      const name = row.species || 'Okänd';
+      const name = row.kingdom || 'Okänd';
       if (!counts[name]) {
         counts[name] = 1;
       } else {
@@ -81,6 +133,5 @@ Papa.parse('data_animal.csv', {
           }
         }
       }
-    });
-  }
-});
+    }); */
+  
