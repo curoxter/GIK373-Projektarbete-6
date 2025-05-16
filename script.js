@@ -1,78 +1,61 @@
-
-Papa.parse('mammalia.csv', { 
+Papa.parse('data.csv', { 
   download: true,
   header: true,
   complete: function(results) {
     const data = results.data;
 
-    const firstRow = results.data[0];
-    console.log("📌 Kolumnnamn:", Object.keys(firstRow));
+    // Filtrera ut raden för Sverige
+    const swedenRow = data.find(row => row["Name"]?.trim() === "Sweden");
 
-    data.forEach(row => {
-      const sortering = row["Svenskt namn"]?.trim();
-     
-      
-      if (sortering) {
-        console.log("info:", sortering);
-      }
-});
+    if (!swedenRow) {
+      console.error("Hittade inte 'Sweden' i datan.");
+      return;
+    }
 
-    const förekomstMap = {};
+    // Välj ut kolumnerna (för alla grupper)
 
-    data.forEach(row => {
-      const art = row.Art || 'Okänd';
-      const förekomst = row["Svensk förekomst"]?.trim();
+    const grupper = [
+      { kolumn: "Mammals", etikett: "Däggdjur" },
+      { kolumn: "Birds", etikett: "Fåglar" },
+      { kolumn: "Reptiles*", etikett: "Kräldjur" },
+      { kolumn: "Amphibians", etikett: "Amfibier" },
+      { kolumn: "Fishes*", etikett: "Fiskar" },
+      { kolumn: "Molluscs*", etikett: "Blötdjur" },
+      { kolumn: "Other Inverts*", etikett: "Ryggradslösa djur" },
+      { kolumn: "Plants*", etikett: "Växter" },
+      { kolumn: "Fungi*", etikett: "Svampar" },
+      { kolumn: "Chromists*", etikett: "Kromister" }
+    ];
 
-      if (art && förekomst) {
-         if (!förekomstMap[förekomst]) {
-           förekomstMap[förekomst] = new Set();
-         }
-         förekomstMap[förekomst].add(art);
-      };
-    });
-    const labels = Object.keys(förekomstMap);
-    const counts = labels.map(key => förekomstMap[key].size);
+    const values = grupper.map(g => parseInt(swedenRow[g.kolumn]) || 0);
+    const labels = grupper.map(g => g.etikett);
 
-    const myChart = new Chart(document.getElementById('myChart'), {
+    const dataChart = new Chart(document.getElementById("dataChart"), {
       type: 'bar',
       data: {
-        labels: labels,
+        labels: labels, // ta bort asterisk
         datasets: [{
-          label: 'Antal arter',
-          data: counts,
-          backgroundColor: 'rgba(54, 162, 235, 0.6)',
-          borderColor: 'rgba(54, 162, 235, 1)',
+          label: 'Rödlistade arter i Sverige',
+          data: values,
+          backgroundColor: 'rgba(196, 25, 25, 0.6)',
+          borderColor: 'rgb(76, 5, 5)',
           borderWidth: 1
         }]
       },
       options: {
         responsive: true,
-        plugins: {
-          legend: {
-            display: false
-          },
-          title: {
-            display: true,
-            text: 'Antal arter per svensk förekomst'
-          }
-        },
         scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Svensk förekomst'
-            },
-            ticks: {
-              autoSkip: false,
-              maxRotation: 45,
-              minRotation: 0
-            }
-          },
           y: {
             beginAtZero: true,
             title: {
               display: true,
               text: 'Antal arter'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Organismgrupp'
             }
           }
         }
@@ -81,15 +64,6 @@ Papa.parse('mammalia.csv', {
   }
 });
 
-
-/* Papa.parse('mammalia.csv', { 
-  download: true,
-  header: true,
-  complete: function(results) {
-    const firstRow = results.data[0];
-    console.log("📌 Kolumnnamn:", Object.keys(firstRow));
-  }
-}); */
 
 
 
