@@ -1,95 +1,96 @@
 
-Papa.parse('data_animal.csv', { 
+Papa.parse('mammalia.csv', { 
   download: true,
   header: true,
   complete: function(results) {
-    const allData = results.data;
-    const animaliaData = allData.filter(row => row.kingdom === 'Animalia');
+    const data = results.data;
 
-    console.log("✅ Antal rader med kingdom = Animalia:", animaliaData.length);
-    console.log(animaliaData);
+    const firstRow = results.data[0];
+    console.log("📌 Kolumnnamn:", Object.keys(firstRow));
 
-    // Step 1: Count occurrences by species and locality
-    const speciesLocalityCounts = {}; // { species: { locality: count } }
-
-    allData.forEach(row => {
-      const species = row.species || 'Okänd';
-      const locality = row.locality || 'Okänd plats';
-
-      console.log(locality);
-
-      if (!speciesLocalityCounts[species]) {
-        speciesLocalityCounts[species] = {};
+    data.forEach(row => {
+      const sortering = row["Svenskt namn"]?.trim();
+     
+      
+      if (sortering) {
+        console.log("info:", sortering);
       }
+});
 
-      if (!speciesLocalityCounts[species][locality]) {
-        speciesLocalityCounts[species][locality] = 1;
-      } else {
-        speciesLocalityCounts[species][locality]++;
-      }
-    });
+    const förekomstMap = {};
 
-    // Step 2: Prepare top species and get all unique localities
-    const topSpecies = Object.entries(speciesLocalityCounts)
-      .sort((a, b) => {
-        const totalA = Object.values(a[1]).reduce((sum, val) => sum + val, 0);
-        const totalB = Object.values(b[1]).reduce((sum, val) => sum + val, 0);
-        return totalB - totalA;
-      })
-      .slice(0, 10); // Top 10 species
+    data.forEach(row => {
+      const art = row.Art || 'Okänd';
+      const förekomst = row["Svensk förekomst"]?.trim();
 
-    const localitiesSet = new Set();
-    topSpecies.forEach(([species, localityCounts]) => {
-      Object.keys(localityCounts).forEach(loc => localitiesSet.add(loc));
-    });
-
-    const allLocalities = Array.from(localitiesSet);
-
-    // Step 3: Prepare datasets for Chart.js
-    const datasets = allLocalities.map(locality => {
-      return {
-        label: locality,
-        data: topSpecies.map(([species, counts]) => counts[locality] || 0),
-        backgroundColor: `hsl(${Math.random() * 360}, 60%, 70%)`
+      if (art && förekomst) {
+         if (!förekomstMap[förekomst]) {
+           förekomstMap[förekomst] = new Set();
+         }
+         förekomstMap[förekomst].add(art);
       };
     });
+    const labels = Object.keys(förekomstMap);
+    const counts = labels.map(key => förekomstMap[key].size);
 
-    const ctx = document.getElementById('chart').getContext('2d');
-    new Chart(ctx, {
+    const myChart = new Chart(document.getElementById('myChart'), {
       type: 'bar',
       data: {
-        labels: topSpecies.map(([species]) => species),
-        datasets: datasets
+        labels: labels,
+        datasets: [{
+          label: 'Antal arter',
+          data: counts,
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
       },
       options: {
         responsive: true,
         plugins: {
+          legend: {
+            display: false
+          },
           title: {
             display: true,
-            text: 'Arter (Animalia) och deras förekomst per lokalitet'
-          },
-          legend: {
-            position: 'top'
+            text: 'Antal arter per svensk förekomst'
           }
         },
         scales: {
           x: {
-            stacked: true,
+            title: {
+              display: true,
+              text: 'Svensk förekomst'
+            },
             ticks: {
               autoSkip: false,
               maxRotation: 45,
-              minRotation: 45
+              minRotation: 0
             }
           },
           y: {
             beginAtZero: true,
-            stacked: true
+            title: {
+              display: true,
+              text: 'Antal arter'
+            }
           }
         }
       }
     });
   }
 });
+
+
+/* Papa.parse('mammalia.csv', { 
+  download: true,
+  header: true,
+  complete: function(results) {
+    const firstRow = results.data[0];
+    console.log("📌 Kolumnnamn:", Object.keys(firstRow));
+  }
+}); */
+
 
 
 
