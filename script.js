@@ -1,4 +1,4 @@
-Papa.parse('data.csv', { 
+/* Papa.parse('data.csv', { 
   download: true,
   header: true,
   complete: function(results) {
@@ -62,12 +62,65 @@ Papa.parse('data.csv', {
       }
     });
   }
-});
+}); */
 
+/* const urlRedList = 'https://api.artdatabanken.se/taxonlistservice/v1/definitions';
 
+const queryRedList = 
+{
+  "query": [
+    {
+      "code": "conservationLists",
+    }
+  ]
+} */
 
-
-
+fetch('https://api.artdatabanken.se/taxonlistservice/v1/definitions', {
+  headers: {
+    'Ocp-Apim-Subscription-Key': '9b2fe9b15b6f43fb980b960b7553dddd',
+  }
+})
+.then(response => response.json())
+.then(data => {
+  const lists = data.conservationLists;
+  
+    // Om det är ett objekt med nycklar och värden:
+    // Gör labels av nycklar och data av värden
+  const labels = Object.keys(lists);
+  const values = labels.map(key => lists[key]);
+  console.log('conservationLists:', lists);
+  console.log('Labels:', labels);
+  console.log('Values:', values);
+  
+    // Skapa en bar chart
+    const chart = new Chart(document.getElementById('dataChart'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Rödlistade arter',
+          data: values,
+          backgroundColor: 'rgba(255, 99, 132, 0.6)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true },
+          x: { title: { display: true, text: 'Kategori' } }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Conservation Lists Statistik'
+          }
+        }
+      }
+    });
+  })
+.catch(error => console.error(error));
     
  
 
