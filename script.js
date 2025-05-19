@@ -80,7 +80,7 @@ fetch('https://api.artdatabanken.se/taxonlistservice/v1/definitions', {
     'Ocp-Apim-Subscription-Key': '9b2fe9b15b6f43fb980b960b7553dddd',
   }
 })
-<<<<<<< HEAD
+
 .on('end', () => {
     console.log('CSV file successfully processed.');
 });
@@ -93,7 +93,7 @@ const testChart = new CharacterData(document.getElementById('correlationChart'),
     backgroundColor: 'rgba(255, 99, 132, 0.7)'
   }
 });
-=======
+
 .then(response => response.json())
 .then(data => {
   const lists = data.conservationLists;
@@ -213,5 +213,4 @@ const myChart = new Chart (
         );
         }
   
- */
->>>>>>> 01c10417e0516de579b1c921e21cee594dce1042
+*/
