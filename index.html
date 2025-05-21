@@ -4,26 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.plot.ly/plotly-3.0.1.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="styles.css">
 
-    <title>Grupp 6</title>
+    <title>Markens trilemma - Grupp 6</title>
 </head>
 <body>
     <div>
-        <h2>Korrelation mellan bebyggelse och utrotningshotade arter</h2>
-        <canvas id ="scb"></canvas>
-        <canvas id="scb2"></canvas>
+        <header>
+        <h1>Markens trilemma: Kan vi samtidigt skydda, bruka och bygga?</h1>
+        <p class="subtitle"> av samspelet mellan naturskydd, skogsbruk och exploatering i Sverige</p>
+        </header>
+
+        <div class="info-box">
+            <p>Denna interaktiva visualisering visar hur Sveriges mark används för olika ändamål och hur dessa användingsområden konkurrerar med varandra</p>
+        </div>
+
+        <section>
+        <h2>Exploatering</h2>
+        <canvas id="bygg"></canvas>
+        <p>Diagram som visar utvecklingen av exploaterad mark över tid.</p>
+    </section>
+
+
+        <section>
+        <h2>Produktiv skogsmark</h2>
+        <div id="skogstatestik">
+        <p>Kartan visar andelen produktiv skogsmark av den totala landarealen per län. Produktiv skogsmark definieras enligt SCB som mark som kan producera i genomsnitt minst en kubikmeter virke per hektar och år.</p>
+    </div>
+    </section>
+
     </div>
     <div>
-        <h2>Fördelning av utrotningshotade arter</h2>
+       
         <canvas id="speciesChart"></canvas>
     </div>
     
-    <title>Data</title>
-    <h3> test </h3>
-    <div id="energyStatistics"></div>
+    <section>
+        <h2>Skyddad natur</h2>
+        <div id="natureStatistics"></div>
+        <p>Visualisering av skyddad natur i Sverige, inklusive nationalparker, naturreservat och andra skyddade områden.</p>
+    </section>
+    <section>
+        <h2>Skyddad natur hektar</h2>
+        <div id="hektarStatistik"></div>
+    </section>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
     
+    <footer>
+        <p> 2025 Grupp 6 | Data från SCB</p>
+    </footer>
 </body>
 </html>
 
