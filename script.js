@@ -311,7 +311,6 @@ const skogQuery ={
   }
 };
 
-//skyddad natur karta
 const regionCodes = {
   '01': 'Stockholm',
   '03': 'Uppsala',
@@ -335,7 +334,7 @@ const regionCodes = {
   24: 'Västerbotten',
   25: 'Norrbotten'
 };
-
+//Karta över skyddad natur
 async function calculateHektarData() {
   const hektarData = await fetch(hektarUrl, {
     method: "POST",
@@ -374,7 +373,6 @@ async function calculateHektarData() {
   };
 
 }
-
 async function displayHektarDataOnMap() {
   const mapData = await calculateHektarData();
 
@@ -392,31 +390,32 @@ async function displayHektarDataOnMap() {
     }
   }];
 
-  const layout = {
-    map: { center: { lon: 17.3, lat: 63 }, zoom: 3.3 },
-    width: 570,
-    height: 750,
-    title: "Andel skyddad natur per län (%)"
+  var layout = {
+  map: {center: {lon: 17.3, lat: 63}, zoom: 3.3},
+  width: window.innerWidth > 480 ? 750 : window.innerWidth - 40,  // Responsiv bredd
+  height: window.innerWidth > 480 ? 600 : 400,  // Responsiv höjd
+  title: "Andel produktiv skogsmark per län (2020)"
   };
 
   Plotly.newPlot('hektarStatistik', data, layout, { displayModeBar: false });
 
-
-
+  window.addEventListener('resize', function() {
+    Plotly.relayout('skogstatestik', { // Ändra ID för varje karta
+      width: window.innerWidth < 500 ? window.innerWidth - 40 : 750,
+      height: window.innerWidth < 500 ? 400 : 600
+    });
+  });
 
 }
 displayHektarDataOnMap();
 
-
-
-
+//Bebyggelse i 1000m2
 function printByggChart(byggData) {
   const years = byggData.data;
   console.log(years);
   const labels = years.map((year) => year.key[0]);
   console.log(labels);
-  const data = years.map((year) => year.values[0]);
-  console.log(data);
+  const data = years.map((year) => parseFloat(year.values[0]) * 10);
 
   const datasets = [
     {
@@ -495,14 +494,16 @@ var data = [{
 
 }];
 
-var layout = {map: {center: {lon: 17.3, lat: 63}, zoom: 3.3},
-            width: 570,
-            height: 750,
+var layout = {
+  map: {center: {lon: 17.3, lat: 63}, zoom: 3.3},
+  width: window.innerWidth > 480 ? 750 : window.innerWidth - 40,  // Responsiv bredd
+  height: window.innerWidth > 480 ? 600 : 400,  // Responsiv höjd
+  title: "Andel skyddad natur(2020)", 
+};
 
-            title: "Procentuell andel skyddad natur per län (2023)"
-            };
 
 Plotly.newPlot('natureStatistics', data, layout, { displayModeBar: false });
+
 }
 displaySCBDataOnMap();
 
@@ -597,7 +598,7 @@ async function displayskogDataOnMap() {
   
   var layout = {
     map: {center: {lon: 17.3, lat: 63}, zoom: 3.3},
-    width: 350, height: 550,
+    autosize: true,
     title: "Andel produktiv skogsmark per län (2020)"
   };
   

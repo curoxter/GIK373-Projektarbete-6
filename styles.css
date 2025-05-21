@@ -152,7 +152,7 @@
   /* Fix for canvas elements */
   canvas {
     display: block;
-    background-color: var(--white);
+   /* background-color: var(--white);*/
     border-radius: var(--border-radius);
     margin: 1rem 0;
     padding: 0;
