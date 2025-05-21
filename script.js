@@ -1,269 +1,6 @@
-//HÄR ÄR APIN FRÅN DJUREN
-const API_KEY = '2ac7992d7a5a478486a068f5b0445068';
 
-// Konstanter för rödlistans kategorier
-const REDLIST_CATEGORIES = {
-  'CR': 'Akut hotad'
-};
 
-// Funktion för att visa statusmeddelanden
-function showMessage(message, isError = false) {
-  let messageElement = document.getElementById('statusMessage');
-  if (!messageElement) {
-    messageElement = document.createElement('div');
-    messageElement.id = 'statusMessage';
-    messageElement.style.padding = '10px';
-    messageElement.style.margin = '10px 0';
-    messageElement.style.textAlign = 'center';
-    document.body.appendChild(messageElement);
-  }
-  
-  messageElement.textContent = message;
-  messageElement.style.backgroundColor = isError ? '#ffdddd' : '#eaeaea';
-  messageElement.style.color = isError ? '#cc0000' : '#333333';
-}
-
-// Funktion för att hämta akut hotade däggdjur
-async function fetchCriticallyEndangeredMammals() {
-  showMessage('Hämtar data om akut hotade däggdjur...');
-  
-  try {
-    // För demonstrationsändamål använder vi hårdkodad data
-    // I verkligheten skulle vi anropa API:et
-    const demoData = [
-      { name: "Fjällräv", scientificName: "Vulpes lagopus", category: "CR" },
-      { name: "Varg", scientificName: "Canis lupus", category: "CR" },
-      { name: "Sydlig järv", scientificName: "Gulo gulo", category: "CR" },
-      { name: "Brunbjörn", scientificName: "Ursus arctos", category: "CR" },
-      { name: "Lodjur", scientificName: "Lynx lynx", category: "CR" }
-    ];
-    
-    // Simulera en API-fördröjning
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    showMessage('Data hämtad, skapar tabell och diagram...');
-    
-    // Skapa både tabell och diagram för att visa datan
-    createEndangeredMammalsList(demoData);
-    createEndangeredMammalsChart(demoData);
-    
-    // I en riktig implementation skulle vi göra följande:
-    /*
-    // 1. Hitta rödlistans ID
-    const definitionsResponse = await fetch('https://api.artdatabanken.se/taxonlistservice/v1/definitions', {
-      headers: { 'Ocp-Apim-Subscription-Key': API_KEY }
-    });
-    const definitions = await definitionsResponse.json();
-    const redlistDef = definitions.find(d => d.name && d.name.includes('Rödlista'));
-    
-    if (!redlistDef) throw new Error('Kunde inte hitta rödlistan');
-    
-    // 2. Hämta rölistade arter
-    const redlistResponse = await fetch(`https://api.artdatabanken.se/taxonlistservice/v1/taxonlist/${redlistDef.id}`, {
-      headers: { 'Ocp-Apim-Subscription-Key': API_KEY }
-    });
-    const redlistData = await redlistResponse.json();
-    
-    // 3. Filtrera ut bara däggdjur med kategori CR
-    const criticallyEndangeredMammals = redlistData.filter(species => 
-      species.taxonCategory === 'Mammalia' && species.redListCategory === 'CR'
-    );
-    */
-    
-  } catch (error) {
-    console.error('Fel vid hämtning av data:', error);
-    showMessage('Ett fel uppstod: ' + error.message, true);
-  }
-}
-
-// Funktion för att skapa en tabell över akut hotade däggdjur
-function createEndangeredMammalsList(data) {
-  // Skapa container
-  let container = document.getElementById('mammalsContainer');
-  if (!container) {
-    container = document.createElement('div');
-    container.id = 'mammalsContainer';
-    container.style.maxWidth = '800px';
-    container.style.margin = '20px auto';
-    document.body.appendChild(container);
-  }
-  
-  // Skapa rubrik
-  const heading = document.createElement('h2');
-  heading.textContent = 'Akut hotade däggdjur i Sverige';
-  heading.style.textAlign = 'center';
-  container.appendChild(heading);
-  
-  // Skapa tabell
-  const table = document.createElement('table');
-  table.style.width = '100%';
-  table.style.borderCollapse = 'collapse';
-  table.style.marginTop = '20px';
-  
-  // Skapa tabellhuvud
-  const thead = document.createElement('thead');
-  const headerRow = document.createElement('tr');
-  
-  const headers = ['Art', 'Vetenskapligt namn', 'Hotkategori'];
-  headers.forEach(text => {
-    const th = document.createElement('th');
-    th.textContent = text;
-    th.style.backgroundColor = '#f2f2f2';
-    th.style.padding = '8px';
-    th.style.border = '1px solid #ddd';
-    headerRow.appendChild(th);
-  });
-  
-  thead.appendChild(headerRow);
-  table.appendChild(thead);
-  
-  // Skapa tabellkropp
-  const tbody = document.createElement('tbody');
-  
-  data.forEach((species, index) => {
-    const row = document.createElement('tr');
-    row.style.backgroundColor = index % 2 === 0 ? '#ffffff' : '#f9f9f9';
-    
-    // Skapa celler
-    const nameCell = document.createElement('td');
-    nameCell.textContent = species.name;
-    nameCell.style.padding = '8px';
-    nameCell.style.border = '1px solid #ddd';
-    
-    const scientificNameCell = document.createElement('td');
-    scientificNameCell.textContent = species.scientificName;
-    scientificNameCell.style.fontStyle = 'italic';
-    scientificNameCell.style.padding = '8px';
-    scientificNameCell.style.border = '1px solid #ddd';
-    
-    const categoryCell = document.createElement('td');
-    categoryCell.textContent = REDLIST_CATEGORIES[species.category];
-    categoryCell.style.padding = '8px';
-    categoryCell.style.border = '1px solid #ddd';
-    categoryCell.style.color = '#cc0000';
-    
-    // Lägg till celler i raden
-    row.appendChild(nameCell);
-    row.appendChild(scientificNameCell);
-    row.appendChild(categoryCell);
-    
-    // Lägg till raden i tabellkroppen
-    tbody.appendChild(row);
-  });
-  
-  table.appendChild(tbody);
-  container.appendChild(table);
-  
-  // Lägg till beskrivningstext
-  const description = document.createElement('p');
-  description.textContent = 'Akut hotad (CR) betyder att arten löper extremt stor risk att dö ut i vilt tillstånd i Sverige.';
-  description.style.marginTop = '10px';
-  description.style.fontStyle = 'italic';
-  container.appendChild(description);
-}
-
-// Funktion för att skapa ett diagram över akut hotade däggdjur
-function createEndangeredMammalsChart(data) {
-  // Skapa canvas-element för diagrammet
-  let container = document.getElementById('chartContainer');
-  if (!container) {
-    container = document.createElement('div');
-    container.id = 'chartContainer';
-    container.style.maxWidth = '800px';
-    container.style.height = '400px';
-    container.style.margin = '30px auto';
-    document.body.appendChild(container);
-    
-    const canvas = document.createElement('canvas');
-    canvas.id = 'mammalsChart';
-    container.appendChild(canvas);
-  }
-  
-  // Skapa data för diagrammet (population per art - simulerat)
-  const populations = [
-    { species: "Fjällräv", population: 120 },
-    { species: "Varg", population: 300 },
-    { species: "Sydlig järv", population: 85 },
-    { species: "Brunbjörn", population: 230 },
-    { species: "Lodjur", population: 190 }
-  ];
-  
-  // Skapa diagrammet
-  const ctx = document.getElementById('mammalsChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: populations.map(item => item.species),
-      datasets: [{
-        label: 'Uppskattad population',
-        data: populations.map(item => item.population),
-        backgroundColor: 'rgba(220, 20, 60, 0.7)',
-        borderColor: 'rgba(220, 20, 60, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Uppskattad population av akut hotade däggdjur i Sverige',
-          font: {
-            size: 16
-          }
-        },
-        legend: {
-          display: false
-        },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              return `Population: ${context.raw} individer`;
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Art'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Antal individer'
-          },
-          beginAtZero: true
-        }
-      }
-    }
-  });
-}
-
-// Initiera applikationen
-function initApp() {
-  // Hämta och lägg till Chart.js om det inte redan finns
-  if (typeof Chart === 'undefined') {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
-    script.onload = fetchCriticallyEndangeredMammals;
-    document.head.appendChild(script);
-  } else {
-    fetchCriticallyEndangeredMammals();
-  }
-}
-
-// Starta applikationen när sidan är laddad
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
-} else {
-  initApp();
-}
-
-const urlSCB = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0803/MI0803A/MarkanvN";
+const urlSCB3 = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0803/MI0803A/MarkanvN";
 
 // Definiera query korrekt
 const query = {
@@ -317,7 +54,7 @@ const markanvMap = {
   "85": "Golfbanor och skidpister"
 };
 
-const request = new Request(urlSCB, {
+const request = new Request(urlSCB3, {
   method: 'POST',
   body: JSON.stringify(query)
 });
@@ -371,7 +108,7 @@ function printSCBChart(dataSCB) {
       type: "bar",
       data: {
         labels: labels, 
-        datasets: datasets
+        datasets: datasets,
       }
     }
   );
@@ -497,3 +234,254 @@ const myChart2 = new Chart(
   }
 );
 }
+
+//
+const landUrl =
+  'https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0803/MI0803B/MarkanvByggnadLnKnN';
+
+const landQuery = {
+  query: [
+    {
+      code: 'Region',
+      selection: {
+        filter: 'vs:BRegionLän07EjAggr',
+        values: [
+          '01',
+          '03',
+          '04',
+          '05',
+          '06',
+          '07',
+          '08',
+          '09',
+          '10',
+          '12',
+          '13',
+          '14',
+          '17',
+          '18',
+          '19',
+          '20',
+          '21',
+          '22',
+          '23',
+          '24',
+          '25'
+        ]
+      }
+    },
+    {
+      code: 'Byggnadstyp',
+      selection: {
+        filter: 'item',
+        values: [
+          '1',
+          '2',
+          '3',
+          '4',
+          '5',
+          '6',
+          '7',
+          '8',
+          '9'
+        ]
+      }
+    },
+    {
+      code: 'Tid',
+      selection: {
+        filter: 'item',
+        values: [
+          '2013',
+          '2014',
+          '2015',
+          '2016',
+          '2017',
+          '2018',
+          '2019',
+          '2020',
+          '2021',
+          '2022',
+          '2023'
+        ]
+      }
+    }
+  ],
+  response: {
+    format: 'JSON'
+  }
+};
+
+async function calculateLandData() {
+  const landData = await fetch(landUrl, {
+    method: 'POST',
+    body: JSON.stringify(landQuery)
+  }).then((response) => response.json());
+
+  console.log(landData);
+}
+calculateLandData();
+
+
+
+
+const regionCodes = {
+  '01': 'Stockholm',
+  '03': 'Uppsala',
+  '04': 'Södermanland',
+  '05': 'Östergötland',
+  '06': 'Jönköping',
+  '07': 'Kronoberg',
+  '08': 'Kalmar',
+  '09': 'Gotland',
+  10: 'Blekinge',
+  12: 'Skåne',
+  13: 'Halland',
+  14: 'Västra Götaland',
+  17: 'Värmland',
+  18: 'Örebro',
+  19: 'Västmanland',
+  20: 'Dalarna',
+  21: 'Gävleborg',
+  22: 'Västernorrland',
+  23: 'Jämtland',
+  24: 'Västerbotten',
+  25: 'Norrbotten'
+};
+
+
+
+
+const SCBUrl = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/SkyddadnaturN"
+
+const SCBQuery ={
+  "query": [
+    {
+      "code": "Region",
+      "selection": {
+        "filter": "vs:RegionLän07EjAggr",
+        "values": [
+          "01",
+          "03",
+          "04",
+          "05",
+          "06",
+          "07",
+          "08",
+          "09",
+          "10",
+          "12",
+          "13",
+          "14",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25"
+        ]
+      }
+    },
+    {
+      "code": "Skyddsform",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "TOTO"
+        ]
+      }
+    },
+    {
+      "code": "ContentsCode",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "000003HE"
+        ]
+      }
+    },
+    {
+      "code": "Tid",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "2023"
+        ]
+      }
+    }
+  ],
+  "response": {
+    "format": "json"
+  }
+}
+
+
+async function calculateSCBData() {
+const SCBData = await fetch(SCBUrl, {
+    method: "POST",
+    body: JSON.stringify(SCBQuery)
+}).then((response) => response.json());
+
+    console.log(SCBData);
+
+const SCBValues = SCBData.data.map(
+    (SCBDataItem) => SCBDataItem.values[0]);
+
+        console.log(SCBValues);
+
+const values = SCBValues.map(value => parseFloat(value));
+
+     const regions = SCBData.data.map(
+        SCBDataItem => 
+            regionCodes[SCBDataItem.key[0]]
+    );
+
+
+    const mapData = {
+        regions: regions,
+        values: values
+    };
+
+    console.log(mapData);
+    return mapData;
+};
+
+calculateSCBData();
+
+
+
+async function displaySCBDataOnMap(){
+const mapData = await calculateSCBData();
+console.log(mapData);
+
+var data = [{
+  type: "choroplethmap", locations:mapData.regions,
+  featureidkey: "properties.name",
+   z: mapData.values.map(value => parseFloat(value)),
+  geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
+  colorscale: [
+  [0, 'red'],       // Lägsta värde (röd)
+  [0.5, 'yellow'],  // Medelvärde (gul)
+  [1, 'green']      // Högsta värde (grön)
+],
+  colorbar: {
+    title: "Skyddad Natur (%)"
+  }
+
+}];
+
+var layout = {map: {center: {lon: 17.3, lat: 63}, zoom: 3.3},
+              width: 370, height:650,
+            title: "Procentuell andel skyddad natur per län (2023)"
+            };
+
+Plotly.newPlot('energyStatistics', data, layout);
+
+
+}
+
+displaySCBDataOnMap();
+
