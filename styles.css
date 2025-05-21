@@ -11,6 +11,71 @@
     --shadow: 0 2px 6px rgba(40, 0, 3, 0.08);
   }
   
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #1b291e;
+    color: #FCFCFC;
+  }
+  
+  /* Ta bort alla eventuella marginaler på header */
+  header {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    max-width: 100%;
+    /* Viktigt: negativt margin om det finns containermarginaler */
+    margin-left: -1px;
+    margin-right: -1px;
+  }
+  
+  /* Se till att bildbehållaren tar exakt 100% av fönsterbredden */
+  .header-image {
+    width: 100vw;
+    height: 500px;
+    margin: 0;
+    padding: 0;
+    background-image: url('/Bild/trail-5726987_1280.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    /* Lägg till detta för att säkerställa att den tar exakt bredden */
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+  
+  /* Overlay */
+  .header-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Centrerat innehåll */
+  .header-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+    max-width: 1000px;
+    z-index: 10;
+  }
+
   body {
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
@@ -182,10 +247,24 @@
       padding: 6px 12px;
       font-size: 0.7rem;
     }
+  .kartor ,canvas {
+    padding: 1rem; /* Minska padding på små skärmar */
+    margin: 1rem 0;
   }
   
-  /* Special treatment for the species chart */
-  #speciesChart {
-    background-color: var(--olive);
-    border: 1px solid var(--tan);
+  /* Justera textstorlek för bättre läsbarhet på små skärmar */
+  .kartor p, .chart-container p {
+    font-size: 0.95rem;
   }
+  
+  /* Gör att kartor och diagram passar bättre på små skärmar */
+  .kartor canvas, .kartor svg, canvas, svg {
+    max-height: 70vh; /* Begränsa höjden till 70% av viewport-höjden */
+  }
+  
+  /* Minska på padding runt text i kartor */
+  .kartor p {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+}

@@ -351,10 +351,7 @@ async function calculateHektarData() {
     region: item.key[0],
     value: parseFloat(item.values[0])
   }));
-  const stockholmSkyddad = hektarData.data.find(item => item.key[0] === "01");
-  const skyddadStockholm = parseFloat(stockholmSkyddad.values[0]);
 
-  console.log("Skyddad natur Stockholm (hektar):", skyddadStockholm);
   const landYta = landYtaData.data.map(item => ({
     region: item.key[0],
     area: parseFloat(item.values[0])
@@ -489,8 +486,8 @@ var data = [{
   geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
   colorscale: [
   [0, 'red'],       // Lägsta värde (röd)
-  [0.5, 'yellow'],  // Medelvärde (gul)
-  [1, 'green']      // Högsta värde (grön)
+  [0.5, 'orange'],  // Medelvärde (gul)
+  [1, 'yellow']      // Högsta värde (grön)
 ],
   colorbar: {
     title: "Skyddad Natur (%)"
@@ -499,7 +496,9 @@ var data = [{
 }];
 
 var layout = {map: {center: {lon: 17.3, lat: 63}, zoom: 3.3},
-              width: 570, height:750,
+            width: 570,
+            height: 750,
+
             title: "Procentuell andel skyddad natur per län (2023)"
             };
 
@@ -587,9 +586,9 @@ async function displayskogDataOnMap() {
     z: mapData.values,
     geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
     colorscale: [
-      [0, 'red'],      // Lägsta värde (röd)
-      [0.5, 'yellow'], // Medelvärde (gul)
-      [1, 'green']     // Högsta värde (grön)
+      [0, 'red'],      // Lägsta värde 
+      [0.5, 'orange'], // Medelvärde 
+      [1, 'yellow']     // Högsta värde
     ],
     colorbar: {
       title: "Produktiv skogsmark (%)"
@@ -598,7 +597,7 @@ async function displayskogDataOnMap() {
   
   var layout = {
     map: {center: {lon: 17.3, lat: 63}, zoom: 3.3},
-    width: 570, height: 750,
+    width: 350, height: 550,
     title: "Andel produktiv skogsmark per län (2020)"
   };
   
@@ -609,245 +608,3 @@ async function displayskogDataOnMap() {
 displayskogDataOnMap();
 
 
-//Hektar efter region, arealtyp och år
-
-
-
-
-
-
-/*const urlSCB3 = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0803/MI0803A/MarkanvN";
-
-// Definiera query korrekt
-const query = {
-  "query": [
-    {
-      "code": "Region",
-      "selection": {
-        "filter": "vs:RegionRiket99",
-        "values": [
-          "00"
-        ]
-      }
-    },
-    {
-      "code": "Markanvandningsklass",
-      "selection": {
-        "filter": "item",
-        "values": [
-          "11", "14", "16", "211", "212", "213", 
-          "3", "421", "811", "911", "85"
-        ]
-      }
-    },
-    {
-      "code": "Tid",
-      "selection": {
-        "filter": "item",
-        "values": [
-          "2020"
-        ]
-      }
-    }
-  ],
-  "response": {
-    "format": "json"
-  }
-};
-
-// Mappning för markanvändningsklasser
-const markanvMap = {
-  "11": "Bebyggd mark",
-  "14": "Åkermark",
-  "16": "Betesmark",
-  "211": "Skogsmark, produktiv",
-  "212": "Skogsmark, improduktiv",
-  "213": "Skogsmark på myr",
-  "3": "Myr",
-  "421": "Berg i dagen och övrig mark",
-  "811": "Sjöar och vattendrag",
-  "911": "Hav",
-  "85": "Golfbanor och skidpister"
-};
-
-const request = new Request(urlSCB3, {
-  method: 'POST',
-  body: JSON.stringify(query)
-});
-
-fetch(request)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    printSCBChart(data);
-  });
-
-function printSCBChart(dataSCB) {
-  console.log(dataSCB);
-  
-  const items = dataSCB.data;
-  console.log(items);
-  
-  // Hämta etiketter - använd markanvMap om det finns, annars koden
-  const labels = items.map(item => markanvMap[item.key[1]] || item.key[1]);
-  console.log(labels);
-  
-  // Hämta ut värdena
-  const data = items.map(item => item.values[0]);
-  console.log(data);
-  
-  // Enkla färger
-  const backgroundColors = [
-    'rgba(255, 99, 132, 0.5)',
-    'rgba(54, 162, 235, 0.5)',
-    'rgba(255, 206, 86, 0.5)',
-    'rgba(75, 192, 192, 0.5)',
-    'rgba(153, 102, 255, 0.5)',
-    'rgba(255, 159, 64, 0.5)',
-    'rgba(255, 99, 132, 0.5)',
-    'rgba(54, 162, 235, 0.5)',
-    'rgba(255, 206, 86, 0.5)',
-    'rgba(75, 192, 192, 0.5)',
-    'rgba(153, 102, 255, 0.5)'
-  ];
-  
-  const datasets = [{
-    label: "Markanvändning i Sverige",
-    data: data,
-    backgroundColor: backgroundColors
-  }];
-  
-  // Skapa diagrammet
-  const myChart = new Chart(
-    document.getElementById('scb'),
-    {
-      type: "bar",
-      data: {
-        labels: labels, 
-        datasets: datasets,
-      }
-    }
-  );
-}
-
-
-const urlSCB2 = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0803/MI0803A/MarkanvN";
-
-
-const query2 = {
-"query": [
-  {
-    "code": "Region",
-    "selection": {
-      "filter": "vs:RegionRiket99",
-      "values": [
-        "00"
-      ]
-    }
-  },
-  {
-    "code": "Markanvandningsklass",
-    "selection": {
-      "filter": "item",
-      "values": [
-        "11", "14", "16", "211", "212", "213", 
-        "3", "421", "811", "911", "85"
-      ]
-    }
-  },
-  {
-    "code": "Tid",
-    "selection": {
-      "filter": "item",
-      "values": [
-        "2015" 
-      ]
-    }
-  }
-],
-"response": {
-  "format": "json"
-}
-};
-
-const markanvMap2 = {
-"11": "Bebyggd mark",
-"14": "Åkermark",
-"16": "Betesmark",
-"211": "Skogsmark, produktiv",
-"212": "Skogsmark, improduktiv",
-"213": "Skogsmark på myr",
-"3": "Myr",
-"421": "Berg i dagen och övrig mark",
-"811": "Sjöar och vattendrag",
-"911": "Hav",
-"85": "Golfbanor och skidpister"
-};
-
-// Nytt variabelnamn för request
-const request2 = new Request(urlSCB2, {
-method: 'POST',
-body: JSON.stringify(query2)
-});
-
-fetch(request2)
-.then(response => response.json())
-.then(data => {
-  console.log(data);
-  printSCBChart2(data);
-});
-
-function printSCBChart2(dataSCB) {
-console.log(dataSCB);
-
-const items2 = dataSCB.data;
-console.log(items2);
-
-const labels2 = items2.map(item => markanvMap2[item.key[1]] || item.key[1]);
-console.log(labels2);
-
-// Hämta ut värdena
-const data2 = items2.map(item => item.values[0]);
-console.log(data2);
-
-const backgroundColors2 = [
-  'rgba(255, 99, 132, 0.5)',
-    'rgba(54, 162, 235, 0.5)',
-    'rgba(255, 206, 86, 0.5)',
-    'rgba(75, 192, 192, 0.5)',
-    'rgba(153, 102, 255, 0.5)',
-    'rgba(255, 159, 64, 0.5)',
-    'rgba(255, 99, 132, 0.5)',
-    'rgba(54, 162, 235, 0.5)',
-    'rgba(255, 206, 86, 0.5)',
-    'rgba(75, 192, 192, 0.5)',
-    'rgba(153, 102, 255, 0.5)'
-];
-
-const datasets2 = [{
-  label: "Markanvändning i Sverige 2015",
-  data: data2,
-  backgroundColor: backgroundColors2
-}];
-
-const myChart2 = new Chart(
-  document.getElementById('scb2'),
-  {
-    type: "bar",
-    data: {
-      labels: labels2, 
-      datasets: datasets2
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Markanvändning i Sverige 2015' // Tydlig titel
-        }
-      }
-    }
-  }
-);
-}
-*/

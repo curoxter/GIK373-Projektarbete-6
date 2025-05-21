@@ -11,8 +11,12 @@
 <body>
     <div>
         <header>
-        <h1>Markens trilemma: Kan vi samtidigt skydda, bruka och bygga?</h1>
-        <p class="subtitle"> av samspelet mellan naturskydd, skogsbruk och exploatering i Sverige</p>
+            <div class="header-image">
+                <div class="header-content">
+                    <h1>Markens trilemma: Kan vi samtidigt skydda, bruka och bygga?</h1>
+                    <p class="subtitle">av samspelet mellan naturskydd, skogsbruk och exploatering i Sverige</p>
+                </div>
+            </div>
         </header>
 
         <div class="info-box">
@@ -28,25 +32,22 @@
 
         <section>
         <h2>Produktiv skogsmark</h2>
-        <div id="skogstatestik">
+        <div class="kartor" id="skogstatestik">
         <p>Kartan visar andelen produktiv skogsmark av den totala landarealen per län. Produktiv skogsmark definieras enligt SCB som mark som kan producera i genomsnitt minst en kubikmeter virke per hektar och år.</p>
     </div>
     </section>
 
     </div>
-    <div>
-       
-        <canvas id="speciesChart"></canvas>
-    </div>
+ 
     
     <section>
         <h2>Skyddad natur</h2>
-        <div id="natureStatistics"></div>
+        <div class="kartor" id="natureStatistics"></div>
         <p>Visualisering av skyddad natur i Sverige, inklusive nationalparker, naturreservat och andra skyddade områden.</p>
     </section>
     <section>
         <h2>Skyddad natur hektar</h2>
-        <div id="hektarStatistik"></div>
+        <div class="kartor" id="hektarStatistik"></div>
     </section>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
