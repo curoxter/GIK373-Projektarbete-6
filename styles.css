@@ -148,7 +148,7 @@ footer {
 }
 
 p {
-  padding-left: 20px;
+  padding-left: 8px;
 } 
 section {
   margin: 1rem 0;
@@ -173,7 +173,7 @@ section:last-of-type::after {
 section p {
   font-size: 0.95rem;
   line-height: 1.7;
-/*   margin: 1rem auto; */
+  margin: 1rem auto;
   
 }
 
@@ -189,11 +189,11 @@ section p {
 .featureCard {
   flex: 1;
   border-radius: 8px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  /* transition: transform 0.2s, box-shadow 0.2s; */
 }
 
 .featureCard:hover {
-  transform: translateY(-5px);
+/*   transform: translateY(-5px); */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 

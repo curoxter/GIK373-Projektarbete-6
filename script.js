@@ -122,72 +122,6 @@ const landYtaQuery = {
   }
 };
 
-//skyddad natur
-const SCBUrl = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/SkyddadnaturN"
-const SCBQuery ={
-  "query": [
-    {
-      "code": "Region",
-      "selection": {
-        "filter": "vs:RegionLän07EjAggr",
-        "values": [
-          "01",
-          "03",
-          "04",
-          "05",
-          "06",
-          "07",
-          "08",
-          "09",
-          "10",
-          "12",
-          "13",
-          "14",
-          "17",
-          "18",
-          "19",
-          "20",
-          "21",
-          "22",
-          "23",
-          "24",
-          "25"
-        ]
-      }
-    },
-    {
-      "code": "Skyddsform",
-      "selection": {
-        "filter": "item",
-        "values": [
-          "TOTO"
-        ]
-      }
-    },
-    {
-      "code": "ContentsCode",
-      "selection": {
-        "filter": "item",
-        "values": [
-          "000003HE"
-        ]
-      }
-    },
-    {
-      "code": "Tid",
-      "selection": {
-        "filter": "item",
-        "values": [
-          "2020"
-        ]
-      }
-    }
-  ],
-  "response": {
-    "format": "JSON"
-  }
-};
-
 //skyddad natur hektar
 const hektarUrl ="https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/SkyddadnaturN"
 const hektarQuery ={
@@ -235,7 +169,7 @@ const hektarQuery ={
       "selection": {
         "filter": "item",
         "values": [
-          "000003HL"
+          "000003HJ"
         ]
       }
     },
@@ -250,9 +184,9 @@ const hektarQuery ={
     }
   ],
   "response": {
-    "format": "JSON"
+    "format": "json"
   }
-};
+}
 
 // skogsbruk
 const skogUrl = "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0803/MI0803A/MarkanvJbSkN"
@@ -307,7 +241,7 @@ const skogQuery ={
     }
   ],
   "response": {
-    "format": "JSON"
+    "format": "json"
   }
 };
 
@@ -334,10 +268,6 @@ const regionCodes = {
   24: 'Västerbotten',
   25: 'Norrbotten'
 };
-
-
-
-
 
 
 //Karta över skyddad natur
@@ -406,54 +336,61 @@ async function displayHektarDataOnMap() {
 
   Plotly.newPlot('hektarStatistik', data, layout, { displayModeBar: false });
 
-  window.addEventListener('resize', function() {
-    Plotly.relayout('skogstatestik', { // Ändra ID för varje karta
+/*   window.addEventListener('resize', function() {
+    Plotly.relayout('skogStatestik', { // Ändra ID för varje karta
       width: window.innerWidth < 500 ? window.innerWidth - 40 : 750,
       height: window.innerWidth < 500 ? 400 : 600
     });
-  });
+  }); */
 
 }
 displayHektarDataOnMap();
 
 
 
-
-
-
-
-
-//Bebyggelse i 1000m2
+//Bebyggelse i hektasr
 function printByggChart(byggData) {
   const years = byggData.data;
-  console.log(years);
   const labels = years.map((year) => regionCodes[year.key[0]]);
-  console.log(labels);
-  const data = years.map((year) => parseFloat(year.values[0]) * 10);
+  const data = years.map((year) => parseFloat(year.values[0]));
 
   const datasets = [
     {
-      label: 'Bebyggelse Sverige',
+      label: 'Bebyggd mark',
       data,
       backgroundColor: [
-      '#1b9e77', '#d95f02', '#7570b3', '#e7298a', '#66a61e',
-      '#e6ab02', '#a6761d', '#666666', '#a6cee3', '#1f78b4',
-      '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f',
-      '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928',
-      '#8dd3c7'
-    ],
-
-   
+        '#1b9e77', '#d95f02', '#7570b3', '#e7298a', '#66a61e', //ger varje län unika färger
+        '#e6ab02', '#a6761d', '#666666', '#a6cee3', '#1f78b4',
+        '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f',
+        '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928',
+        '#8dd3c7'
+        ],
     }
   ];
-   document.getElementById('bygg').height = 23 * labels.length;
+
+  document.getElementById('bygg').height = 20 * labels.length; //ger varje län en specifik yta
+  
 const byggChart = new Chart(document.getElementById('bygg'), {
   type: 'bar',
-  data: { labels, datasets},
+  data: { datasets, labels},
     options: {
-    indexAxis: "y",
-     
-  }
+        indexAxis:"y",//vänder på x oxh y axeln
+     scales: {
+      y: {
+        ticks: {
+          font: {
+            size: 10//storlek på län text
+          },
+          color: '#ffffff' // färg på Y text
+        }
+      },
+    x: {
+      ticks: {
+        color: '#ffffff' // färg på X text
+      }
+    }
+    }
+   }
 });
 }
 const request = new Request(byggUrl, {
@@ -465,152 +402,50 @@ fetch(request)
   .then(printByggChart);
 
 
-
-
-
-
-// skyddad natur
-  
-async function calculateSCBData() {
-const SCBData = await fetch(SCBUrl, {
-    method: "POST",
-    body: JSON.stringify(SCBQuery)
-}).then((response) => response.json());
-
-    console.log(SCBData);
-
-const SCBValues = SCBData.data.map(
-    (SCBDataItem) => SCBDataItem.values[0]);
-
-        console.log(SCBValues);
-
-const values = SCBValues.map(value => parseFloat(value));
-
-     const regions = SCBData.data.map(
-        SCBDataItem => 
-            regionCodes[SCBDataItem.key[0]]
-    );
-
-    const mapData = {
-        regions: regions,
-        values: values
-    };
-
-    console.log(mapData);
-    return mapData;
-};
-
-calculateSCBData();
-async function displaySCBDataOnMap(){
-const mapData = await calculateSCBData();
-console.log(mapData);
-
-var data = [{
-  type: "choroplethmap", locations:mapData.regions,
-  featureidkey: "properties.name",
-   z: mapData.values.map(value => parseFloat(value)),
-  geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
-  colorscale: [
-  [0, 'red'],       // Lägsta värde (röd)
-  [0.5, 'orange'],  // Medelvärde (gul)
-  [1, 'yellow']      // Högsta värde (grön)
-],
-  colorbar: {
-    title: "Skyddad Natur (%)"
-  }
-  
-}];
-
-var layout = {
-  map: {center: {lon: 17.3, lat: 63}, zoom: 3.3, style: 'dark'},
-  height: 650, width: 400,
-  title: "Andel skyddad natur(2020)", 
-  paper_bgcolor: 'rgba(0,0,0,0)',
-  plot_bgcolor: 'rgba(0,0,0,0)',
-};
-
-
-Plotly.newPlot('natureStatistics', data, layout, { displayModeBar: false });
-
-}
-displaySCBDataOnMap();
-
-
-
-
-
-
-
-
+//SKOGKARTA
 
 // Gör bara ett anrop till displayskogDataOnMap, som i sin tur anropar calculateskogData
-async function calculateskogData() {
-  // Hämta skogsdata
+async function calculateSkogData() {
   const skogData = await fetch(skogUrl, {
     method: "POST",
     body: JSON.stringify(skogQuery)
-  }).then((response) => response.json());
-  
-  console.log("Skogsdata:", skogData);
-  
-  // Hämta landytedata
+  }).then(res => res.json());
+
   const landYtaData = await fetch(landYtaUrl, {
     method: "POST",
     body: JSON.stringify(landYtaQuery)
-  }).then((response) => response.json());
-  
-  console.log("Landytedata:", landYtaData);
-  
-  // Extrahera skogsvärdena från API-svaret
-  const skogValues = skogData.data.map(
-    (skogDataItem) => skogDataItem.values[0]
-  );
-  
-  // Konvertera skogsvärdena till float
-  const values = skogValues.map(value => parseFloat(value));
-  console.log("Skogsvärden:", values);
-  
-  // Extrahera landytevärdena från API-svaret - ta bara ArealTyp "01" (landareal)
-  const landYtaValues = [];
-  
-  // Gå igenom landytedata och ta bara värdena för arealtyp "01"
-  for (let i = 0; i < landYtaData.data.length; i += 3) {  // Antar att data kommer i grupper om 3 (01, 02, 03)
-    const value = parseFloat(landYtaData.data[i].values[0]) * 100;  // Konvertera km² till hektar
-    landYtaValues.push(value);
-  }
-  console.log("Landytevärden:", landYtaValues);
-  
-  // Beräkna normaliserade värden (procent)
-  const normalizedValues = [];
-  for (let i = 0; i < values.length; i++) {
-    if (landYtaValues[i] === 0 || isNaN(landYtaValues[i])) {
-      normalizedValues.push(0); // Sätt till 0 om landyta saknas
-    } else {
-      const normalized = (values[i] / landYtaValues[i]) * 100;
-      // Begränsa värdet till 100%
-      normalizedValues.push(isFinite(normalized) ? Math.min(normalized, 100) : 0);
-    }
-  }
-  
-  console.log("Normaliserade värden (%):", normalizedValues);
-  
-  // Extrahera regionnamn
-  const regions = skogData.data.map(
-    skogDataItem => regionCodes[skogDataItem.key[0]]
-  );
-  
-  // Skapa och returnera mapData-objektet
-  const mapData = {
-    regions: regions,
-    values: normalizedValues
+  }).then(res => res.json());
+
+  const skog = skogData.data.map(item => ({
+    region: item.key[0],
+    value: parseFloat(item.values[0])
+  }));
+
+  const landYta = landYtaData.data.map(item => ({
+    region: item.key[0],
+    area: parseFloat(item.values[0])
+  }));
+
+
+  const result = skog.map(item => {
+    const regionName = regionCodes[item.region];
+    const yta = landYta.find(l => l.region === item.region)?.area;
+    const procent = (item.value / yta) * 100;
+    return {
+      region: regionName,
+      value: parseFloat(procent.toFixed(2))
+    };
+  });
+
+  return {
+    regions: result.map(r => r.region),
+    values: result.map(r => r.value)
   };
-  
-  console.log("MapData:", mapData);
-  return mapData;
+
 }
 
-async function displayskogDataOnMap() {
-  const mapData = await calculateskogData();
+async function displaySkogDataOnMap() {
+  const mapData = await calculateSkogData();
   
   var data = [{
     type: "choroplethmap",
@@ -623,9 +458,12 @@ async function displayskogDataOnMap() {
       [0.5, 'orange'], // Medelvärde 
       [1, 'yellow']     // Högsta värde
     ],
+      coloraxis: {
     colorbar: {
       title: "Produktiv skogsmark (%)",
-    },
+
+    }
+  }
   }];
   
   var layout = {
@@ -636,10 +474,10 @@ async function displayskogDataOnMap() {
     plot_bgcolor: 'rgba(0,0,0,0)',
   };
   
-  Plotly.newPlot('skogStatestik', data, layout, { displayModeBar: false });
+  Plotly.newPlot('skogStatestik', data, layout, { displayModeBar: false});
 }
 
 // Bara ett anrop till displayskogDataOnMap
-displayskogDataOnMap();
+displaySkogDataOnMap();
 
 
