@@ -203,6 +203,10 @@ div.user-select-none.svg-container {
 
 }
 
+#bygg {
+  height: 500px;
+}
+
 /* Make charts responsive */
 @media (min-width: 768px) {
 }
