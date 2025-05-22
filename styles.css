@@ -72,20 +72,16 @@ h2 {
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--tan);
   color: var(--butterscotch);
-  margin-left: 49px;
+  margin-left: 18px;
 }
 
-.subtitle {
+/* .subtitle {
   text-align: center;
   color: var(--white);
   margin-bottom: 2rem;
   font-size: 1.1rem;
-}
+} */
 
-p {
-  color: var(--white);
-  margin-bottom: 1.5rem;
-}
 
 /* Chart and content containers */
 .kartor, canvas {
@@ -98,18 +94,6 @@ p {
   
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
-/* .kartor, canvas:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-} */
-
-
->>>>>>> Stashed changes
 canvas {
   display: block;
 
@@ -131,8 +115,7 @@ canvas {
   margin: 0;
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 header {
   text-align: center;
   margin-bottom: 3rem;
@@ -155,10 +138,6 @@ header::before {
   letter-spacing: 1px;
   font-weight: 500;
 }
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 footer {
   text-align: center;
@@ -168,8 +147,11 @@ footer {
   color: var(--tan);
 }
 
+p {
+  padding-left: 20px;
+} 
 section {
-  margin: 3rem 0;
+  margin: 1rem 0;
   position: relative;
 }
 
@@ -191,28 +173,26 @@ section:last-of-type::after {
 section p {
   font-size: 0.95rem;
   line-height: 1.7;
-  max-width: 0%;
-  margin: 1rem auto;
-  margin-left: 49px;
+/*   margin: 1rem auto; */
+  
 }
 
-<<<<<<< Updated upstream
+
 .maplibregl-canvas {
-  transform: translateX(-50px) !important;
+  transform: translateX(-80px) !important;
   display: block;
   border-radius: var(--border-radius);
-  margin: 0.5rem 0;  /* Minska från 1rem till 0.5rem */
   padding: 0;
   border: none;
 }
 
-.feature-card {
+.featureCard {
   flex: 1;
   border-radius: 8px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.feature-card:hover {
+.featureCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
@@ -223,11 +203,6 @@ div.user-select-none.svg-container {
 
 }
 
-<<<<<<< Updated upstream
 /* Make charts responsive */
 @media (min-width: 768px) {
 }
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes

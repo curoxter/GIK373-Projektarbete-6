@@ -442,14 +442,17 @@ function printByggChart(byggData) {
       '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928',
       '#8dd3c7'
     ],
+
+   
     }
   ];
-  
+   document.getElementById('bygg').height = 23 * labels.length;
 const byggChart = new Chart(document.getElementById('bygg'), {
   type: 'bar',
   data: { labels, datasets},
     options: {
-    indexAxis: "y"
+    indexAxis: "y",
+     
   }
 });
 }
