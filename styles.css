@@ -99,7 +99,10 @@ p {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 /* .kartor, canvas:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
@@ -129,6 +132,7 @@ canvas {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 header {
   text-align: center;
   margin-bottom: 3rem;
@@ -151,6 +155,8 @@ header::before {
   letter-spacing: 1px;
   font-weight: 500;
 }
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 
@@ -190,6 +196,7 @@ section p {
   margin-left: 49px;
 }
 
+<<<<<<< Updated upstream
 .maplibregl-canvas {
   transform: translateX(-50px) !important;
   display: block;
@@ -220,5 +227,7 @@ div.user-select-none.svg-container {
 /* Make charts responsive */
 @media (min-width: 768px) {
 }
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
