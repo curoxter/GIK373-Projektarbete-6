@@ -9,262 +9,184 @@
     --background: #1b291e;     /* Mörkgrön bakgrund */
     --border-radius: 6px;
     --shadow: 0 2px 6px rgba(40, 0, 3, 0.08);
-  }
+}
   
-  body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-    background-color: #1b291e;
-    color: #FCFCFC;
-  }
-  
-  /* Ta bort alla eventuella marginaler på header */
-  header {
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-    max-width: 100%;
-    /* Viktigt: negativt margin om det finns containermarginaler */
-    margin-left: -1px;
-    margin-right: -1px;
-  }
-  
-  /* Se till att bildbehållaren tar exakt 100% av fönsterbredden */
-  .header-image {
-    width: 100vw;
-    height: 500px;
-    margin: 0;
-    padding: 0;
-    background-image: url('/Bild/trail-5726987_1280.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    /* Lägg till detta för att säkerställa att den tar exakt bredden */
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
-  
-  /* Overlay */
-  .header-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Centrerat innehåll */
-  .header-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width: 90%;
-    max-width: 1000px;
-    z-index: 10;
-  }
 
-  body {
-    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
-    color: var(--text-dark);
-    background-color: var(--background);
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+body {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-dark);
+  background-color: var(--background);
+  margin: 0;
+}
+
+.contentContainer {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #1b291e;
+  color: #FCFCFC;
+}
+
+.headerContent {
+  display: flexbox;
+  padding: 1rem;
+
+}
+
+/* Se till att bildbehållaren tar exakt 100% av fönsterbredden */
+.headerImage {
+  display: block;
+  width: 100vw;
+  height: 500px;
+  margin: 0;
+  padding: 1rem;
+  background-image: url('/Bild/trail-5726987_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+h1 {
+  font-size: 1.8rem;
+  text-align: center;
+  line-height: 1.3;
+  margin: 0;
+  border-bottom: 1px solid var(--tan);
+  position: relative;
+}
+
+/* h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: var(--butterscotch);
+} */
+
+h2 {
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--tan);
+  color: var(--butterscotch);
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--white);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+p {
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+/* Chart and content containers */
+.kartor, canvas {
+  width: 100%;
+  background-color: transparent;
+
+  border-radius: var(--border-radius);
+  margin: 1.5rem 0;
+  padding: 1.5rem;
   
-  h1, h2, h3 {
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--white);
-  }
-  
-  h1 {
-    font-size: 1.8rem;
-    text-align: center;
-    line-height: 1.3;
-    margin: 2rem 0;
-    padding-bottom: 1rem;
-    position: relative;
-  }
-  
-  h1::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: var(--butterscotch);
-  }
-  
-  h2 {
-    font-size: 1.4rem;
-    margin-top: 2rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--tan);
-    color: var(--butterscotch);
-  }
-  
-  .subtitle {
-    text-align: center;
-    color: var(--white);
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
-  }
-  
-  p {
-    color: var(--white);
-    margin-bottom: 1.5rem;
-  }
-  
-  /* Chart and content containers */
-  #skogstatestik, #natureStatistics, #hektarStatistik, canvas, .chart-container {
-    width: 100%;
-    background-color: var(--olive);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    margin: 1.5rem 0;
-    padding: 1.5rem;
-    transition: transform 0.3s ease;
-    border: 1px solid var(--tan);
-  }
-  
-  #skogstatestik:hover, #natureStatistics:hover, #hektarStatistik:hover, canvas:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Fix for canvas elements */
-  canvas {
-    display: block;
-   /* background-color: var(--white);*/
-    border-radius: var(--border-radius);
-    margin: 1rem 0;
-    padding: 0;
-    border: none;
-  }
-  
-  .info-box {
-    background-color: var(--olive);
-    border-left: 4px solid var(--butterscotch);
-    padding: 1.5rem;
-    margin: 2rem 0;
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-  }
-  
-  .info-box p {
-    margin: 0;
-  }
-  
-  header {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--tan);
-    position: relative;
-  }
-  
-  /* A.N OTHER inspired brand badge */
-  header::before {
-    content: "GRUPP 6";
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: var(--black-bean);
-    color: var(--white);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    font-weight: 500;
-  }
-  
-  footer {
-    text-align: center;
-    margin-top: 3rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--tan);
-    color: var(--tan);
-  }
-  
-  section {
-    margin: 3rem 0;
-    position: relative;
-  }
-  
-  /* Stylish divider */
-  section::after {
-    content: "";
-    display: block;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--tan), transparent);
-    margin: 3rem 0;
-  }
-  
-  /* Remove divider from last section */
-  section:last-of-type::after {
-    display: none;
-  }
-  
-  /* A.N OTHER inspired minimalist look for paragraphs within sections */
-  section p {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    max-width: 90%;
-    margin: 1rem auto;
-  }
-  
-  /* Make charts responsive */
-  @media (max-width: 768px) {
-    body {
-      padding: 15px;
-    }
-    
-    h1 {
-      font-size: 1.5rem;
-    }
-    
-    h2 {
-      font-size: 1.2rem;
-    }
-    
-    header::before {
-      padding: 6px 12px;
-      font-size: 0.7rem;
-    }
-  .kartor ,canvas {
-    padding: 1rem; /* Minska padding på små skärmar */
-    margin: 1rem 0;
-  }
-  
-  /* Justera textstorlek för bättre läsbarhet på små skärmar */
-  .kartor p, .chart-container p {
-    font-size: 0.95rem;
-  }
-  
-  /* Gör att kartor och diagram passar bättre på små skärmar */
-  .kartor canvas, .kartor svg, canvas, svg {
-    max-height: 70vh; /* Begränsa höjden till 70% av viewport-höjden */
-  }
-  
-  /* Minska på padding runt text i kartor */
-  .kartor p {
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
+}
+
+.kartor, canvas:hover {
+  /* transform: translateY(-5px); */
+  /* box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); */
+}
+
+
+canvas {
+  display: block;
+ /* background-color: var(--white);*/
+  border-radius: var(--border-radius);
+  margin: 1rem 0;
+  padding: 0;
+  border: none;
+}
+
+.infoBox {
+  background-color: var(--olive);
+  border-left: 4px solid var(--butterscotch);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.infoBox p {
+  margin: 0;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--tan);
+  position: relative;
+}
+
+/* A.N OTHER inspired brand badge */
+header::before {
+  content: "GRUPP 6";
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--black-bean);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--tan);
+  color: var(--tan);
+}
+
+section {
+  margin: 3rem 0;
+  position: relative;
+}
+
+/* Stylish divider */
+section::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--tan), transparent);
+  margin: 3rem 0;
+}
+
+/* Remove divider from last section */
+section:last-of-type::after {
+  display: none;
+}
+
+/* A.N OTHER inspired minimalist look for paragraphs within sections */
+section p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 90%;
+  margin: 1rem auto;
+}
+
+/* Make charts responsive */
+@media (min-width: 768px) {
 }

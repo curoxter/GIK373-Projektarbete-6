@@ -334,6 +334,12 @@ const regionCodes = {
   24: 'Västerbotten',
   25: 'Norrbotten'
 };
+
+
+
+
+
+
 //Karta över skyddad natur
 async function calculateHektarData() {
   const hektarData = await fetch(hektarUrl, {
@@ -391,10 +397,11 @@ async function displayHektarDataOnMap() {
   }];
 
   var layout = {
-  map: {center: {lon: 17.3, lat: 63}, zoom: 3.3},
-  width: window.innerWidth > 480 ? 750 : window.innerWidth - 40,  // Responsiv bredd
-  height: window.innerWidth > 480 ? 600 : 400,  // Responsiv höjd
-  title: "Andel produktiv skogsmark per län (2020)"
+  map: {center: {lon: 17.3, lat: 63}, zoom: 3.3, style: 'dark'},
+  height: 650, width: 400,
+  title: "Andel produktiv skogsmark per län (2020)",
+  paper_bgcolor: 'rgba(0,0,0,0)',
+  plot_bgcolor: 'rgba(0,0,0,0)',
   };
 
   Plotly.newPlot('hektarStatistik', data, layout, { displayModeBar: false });
@@ -408,6 +415,13 @@ async function displayHektarDataOnMap() {
 
 }
 displayHektarDataOnMap();
+
+
+
+
+
+
+
 
 //Bebyggelse i 1000m2
 function printByggChart(byggData) {
@@ -440,6 +454,10 @@ const request = new Request(byggUrl, {
 fetch(request)
   .then((response) => response.json())
   .then(printByggChart);
+
+
+
+
 
 
 // skyddad natur
@@ -491,14 +509,15 @@ var data = [{
   colorbar: {
     title: "Skyddad Natur (%)"
   }
-
+  
 }];
 
 var layout = {
-  map: {center: {lon: 17.3, lat: 63}, zoom: 3.3},
-  width: window.innerWidth > 480 ? 750 : window.innerWidth - 40,  // Responsiv bredd
-  height: window.innerWidth > 480 ? 600 : 400,  // Responsiv höjd
+  map: {center: {lon: 17.3, lat: 63}, zoom: 3.3, style: 'dark'},
+  height: 650, width: 400,
   title: "Andel skyddad natur(2020)", 
+  paper_bgcolor: 'rgba(0,0,0,0)',
+  plot_bgcolor: 'rgba(0,0,0,0)',
 };
 
 
@@ -506,6 +525,10 @@ Plotly.newPlot('natureStatistics', data, layout, { displayModeBar: false });
 
 }
 displaySCBDataOnMap();
+
+
+
+
 
 
 
@@ -592,17 +615,19 @@ async function displayskogDataOnMap() {
       [1, 'yellow']     // Högsta värde
     ],
     colorbar: {
-      title: "Produktiv skogsmark (%)"
-    }
+      title: "Produktiv skogsmark (%)",
+    },
   }];
   
   var layout = {
-    map: {center: {lon: 17.3, lat: 63}, zoom: 3.3},
-    autosize: true,
-    title: "Andel produktiv skogsmark per län (2020)"
+    map: {center: {lon: 17.3, lat: 63}, zoom: 3.3, style: 'dark'},
+    height: 650, width: 400,
+    title: "Andel produktiv skogsmark per län (2020)",
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
   };
   
-  Plotly.newPlot('skogstatestik', data, layout, { displayModeBar: false });
+  Plotly.newPlot('skogStatestik', data, layout, { displayModeBar: false });
 }
 
 // Bara ett anrop till displayskogDataOnMap
