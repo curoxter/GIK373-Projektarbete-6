@@ -270,6 +270,10 @@ const regionCodes = {
 };
 
 
+
+
+
+
 //Karta över skyddad natur
 async function calculateHektarData() {
   const hektarData = await fetch(hektarUrl, {
@@ -291,7 +295,6 @@ async function calculateHektarData() {
     region: item.key[0],
     area: parseFloat(item.values[0])
   }));
-
 
   const result = hektar.map(item => {
     const regionName = regionCodes[item.region];
@@ -319,16 +322,30 @@ async function displayHektarDataOnMap() {
     z: mapData.values,
     geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
     zmin: 0,
-    zmax: 40,
-    colorscale: "YlGnBu",
+    zmax: 90,
+    colorscale:  [  
+    [0.0, "#7F0000"], 
+
+    [0.2, "#FF8000"],
+
+    [0.4, "#FFF000"],
+
+    [0.6, "#E0F909"],
+   
+    [0.8, "#00C943"],
+   
+    [1.0, "#06B800"]
+    ],
     colorbar: {
-      title: "Skyddad Natur (%)"
+      title: "Skyddad Natur (%)",
+    tickvals: [10, 30, 50, 70, 90, 100],
+    ticktext: ["0–20%", "20–40%", "40–60%","60–80%", "80–100%"]
     }
   }];
 
   var layout = {
-  map: {center: {lon: 17.3, lat: 63}, zoom: 3.3, style: 'dark'},
-  height: 650, width: 400,
+  map: {center: {lon: 17.3, lat: 63}, zoom: 3, style: 'dark'},
+  height: 550, width: 320,
   title: "Andel produktiv skogsmark per län (2020)",
   paper_bgcolor: 'rgba(0,0,0,0)',
   plot_bgcolor: 'rgba(0,0,0,0)',
@@ -336,15 +353,11 @@ async function displayHektarDataOnMap() {
 
   Plotly.newPlot('hektarStatistik', data, layout, { displayModeBar: false });
 
-/*   window.addEventListener('resize', function() {
-    Plotly.relayout('skogStatestik', { // Ändra ID för varje karta
-      width: window.innerWidth < 500 ? window.innerWidth - 40 : 750,
-      height: window.innerWidth < 500 ? 400 : 600
-    });
-  }); */
-
 }
 displayHektarDataOnMap();
+
+
+
 
 
 
@@ -454,9 +467,9 @@ async function displaySkogDataOnMap() {
     z: mapData.values,
     geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
     colorscale: [
-      [0, 'red'],      // Lägsta värde 
-      [0.5, 'orange'], // Medelvärde 
-      [1, 'yellow']     // Högsta värde
+      [0, 'white'],      // Lägsta värde 
+      [0.5, 'lightgrey'], // Medelvärde 
+      [1, 'darkgray']     // Högsta värde
     ],
       coloraxis: {
     colorbar: {
@@ -467,8 +480,8 @@ async function displaySkogDataOnMap() {
   }];
   
   var layout = {
-    map: {center: {lon: 17.3, lat: 63}, zoom: 3.3, style: 'dark'},
-    height: 650, width: 400,
+    map: {center: {lon: 17.3, lat: 63}, zoom: 3, style: 'dark'},
+    height: 550, width: 320,
     title: "Andel produktiv skogsmark per län (2020)",
     paper_bgcolor: 'rgba(0,0,0,0)',
     plot_bgcolor: 'rgba(0,0,0,0)',
