@@ -10,7 +10,6 @@
     --border-radius: 6px;
     --shadow: 0 2px 6px rgba(40, 0, 3, 0.08);
 }
-  
 
 body {
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
@@ -77,6 +76,7 @@ h2 {
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--tan);
   color: var(--butterscotch);
+  margin-left: 49px;
 }
 
 .subtitle {
@@ -101,12 +101,6 @@ p {
   padding: 1.5rem;
   
 }
-
-.kartor, canvas:hover {
-  /* transform: translateY(-5px); */
-  /* box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); */
-}
-
 
 canvas {
   display: block;
@@ -137,7 +131,7 @@ header {
   position: relative;
 }
 
-/* A.N OTHER inspired brand badge */
+
 header::before {
   content: "GRUPP 6";
   position: absolute;
@@ -185,6 +179,33 @@ section p {
   line-height: 1.7;
   max-width: 90%;
   margin: 1rem auto;
+  margin-left: 49px;
+}
+
+.maplibregl-canvas {
+  transform: translateX(-50px) !important;
+  display: block;
+  border-radius: var(--border-radius);
+  margin: 0.5rem 0;  /* Minska från 1rem till 0.5rem */
+  padding: 0;
+  border: none;
+}
+
+.feature-card {
+  flex: 1;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+div.user-select-none.svg-container {
+  margin-top: -130px;
+  padding-top: 0;
+
 }
 
 /* Make charts responsive */
