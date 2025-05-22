@@ -16,32 +16,38 @@ body {
   color: var(--text-dark);
   background-color: var(--background);
   margin: 0;
+  padding: 0;
 }
 
 .contentContainer {
-  display: flex;
-  flex-wrap: wrap;
+  display: block;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
   background-color: #1b291e;
   color: #FCFCFC;
 }
 
-.headerContent {
-  display: flexbox;
-  padding: 1rem;
-
-}
 
 /* Se till att bildbehållaren tar exakt 100% av fönsterbredden */
 .headerImage {
-  display: block;
-  width: 100vw;
-  height: 500px;
-  margin: 0;
-  padding: 1rem;
   background-image: url('/Bild/trail-5726987_1280.jpg');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  height: 50vh; /* justera efter behov */
+  min-height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
   position: relative;
+}
+
+.headerContent {
+  padding: 1rem;
 }
 
 h1, h2, h3 {
@@ -59,16 +65,6 @@ h1 {
   position: relative;
 }
 
-/* h1::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background-color: var(--butterscotch);
-} */
 
 h2 {
   font-size: 1.4rem;
@@ -102,9 +98,18 @@ p {
   
 }
 
+<<<<<<< Updated upstream
+=======
+/* .kartor, canvas:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+} */
+
+
+>>>>>>> Stashed changes
 canvas {
   display: block;
- /* background-color: var(--white);*/
+
   border-radius: var(--border-radius);
   margin: 1rem 0;
   padding: 0;
@@ -123,6 +128,7 @@ canvas {
   margin: 0;
 }
 
+<<<<<<< Updated upstream
 header {
   text-align: center;
   margin-bottom: 3rem;
@@ -145,6 +151,8 @@ header::before {
   letter-spacing: 1px;
   font-weight: 500;
 }
+=======
+>>>>>>> Stashed changes
 
 footer {
   text-align: center;
@@ -177,7 +185,7 @@ section:last-of-type::after {
 section p {
   font-size: 0.95rem;
   line-height: 1.7;
-  max-width: 90%;
+  max-width: 0%;
   margin: 1rem auto;
   margin-left: 49px;
 }
@@ -208,6 +216,9 @@ div.user-select-none.svg-container {
 
 }
 
+<<<<<<< Updated upstream
 /* Make charts responsive */
 @media (min-width: 768px) {
 }
+=======
+>>>>>>> Stashed changes

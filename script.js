@@ -427,7 +427,7 @@ displayHektarDataOnMap();
 function printByggChart(byggData) {
   const years = byggData.data;
   console.log(years);
-  const labels = years.map((year) => year.key[0]);
+  const labels = years.map((year) => regionCodes[year.key[0]]);
   console.log(labels);
   const data = years.map((year) => parseFloat(year.values[0]) * 10);
 
@@ -435,16 +435,22 @@ function printByggChart(byggData) {
     {
       label: 'Bebyggelse Sverige',
       data,
-      fill: false,
-      borderWidth: 2,
-      borderColor: 'hsla(250, 100%, 30%, 1)',
-      hoverBorderWidth: 4
+      backgroundColor: [
+      '#1b9e77', '#d95f02', '#7570b3', '#e7298a', '#66a61e',
+      '#e6ab02', '#a6761d', '#666666', '#a6cee3', '#1f78b4',
+      '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f',
+      '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928',
+      '#8dd3c7'
+    ],
     }
   ];
   
 const byggChart = new Chart(document.getElementById('bygg'), {
   type: 'bar',
-  data: { labels, datasets}
+  data: { labels, datasets},
+    options: {
+    indexAxis: "y"
+  }
 });
 }
 const request = new Request(byggUrl, {
