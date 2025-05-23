@@ -7,6 +7,7 @@
     --text-dark: var(--white);
     --text-light: var(--white);
     --background: #1b291e;     /* Mörkgrön bakgrund */
+    --background-opaque: rgb(27, 41, 30, 0.4);     /* Mörkgrön bakgrund */
     --border-radius: 6px;
     --shadow: 0 2px 6px rgba(40, 0, 3, 0.08);
 }
@@ -86,9 +87,9 @@ nav a:hover {
   background-color: var(--olive);
 }
 
-nav li:first-child {
+/* nav li:first-child {
   margin-right: auto;
-}
+} */
 
 .sidebar {
   position: fixed;
@@ -97,10 +98,10 @@ nav li:first-child {
   height: 100vh;
   width: 250px;
   z-index: 999;
-  background-color: var(--background);
-  backdrop-filter: blur(20px);
+  background-color: var(--background-opaque);
+  backdrop-filter: blur(10px);
   box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -112,6 +113,10 @@ nav li:first-child {
 
 .sidebar a {
   width: 100%;
+}
+
+.hideOnMobile{
+  display: none;
 }
 
 .contentContainer {
@@ -221,8 +226,8 @@ header {
 
 
 header::before {
-  content: "GRUPP 6";
-  position: absolute;
+/*   content: "GRUPP 6";
+  position: absolute; */
   top: 0;
   right: 0;
   background-color: var(--black-bean);
@@ -317,4 +322,7 @@ div.user-select-none.svg-container {
 }
 /* Make charts responsive */
 @media (min-width: 768px) {
+  .hideOnMobile{
+    display: flex;
+  }
 }
