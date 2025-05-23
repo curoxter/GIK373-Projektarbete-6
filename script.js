@@ -411,17 +411,26 @@ async function displaySkogDataOnMap() {
     featureidkey: "properties.name",
     z: mapData.values,
     geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
-    colorscale: [
-      [0, 'white'],      // Lägsta värde 
-      [0.5, 'lightgrey'], // Medelvärde 
-      [1, 'darkgray']     // Högsta värde
+    zmin: 0,
+    zmax: 90,
+    colorscale:  [  
+    [0.0, "#7F0000"], 
+
+    [0.2, "#FF8000"],
+
+    [0.4, "#FFF000"],
+
+    [0.6, "#E0F909"],
+   
+    [0.8, "#00C943"],
+   
+    [1.0, "#06B800"]
     ],
-      coloraxis: {
     colorbar: {
       title: "Produktiv skogsmark (%)",
-
+    tickvals: [10, 30, 50, 70, 90, 100],
+    ticktext: ["0–20%", "20–40%", "40–60%","60–80%", "80–100%"]
     }
-  }
   }];
   
   var layout = {
@@ -580,9 +589,7 @@ async function createCompareChart() {
       },
       plugins: {
         legend: {
-          labels: {
-            color: '#fff'
-          }
+          display: false //tar bort färgrutan i titeln
         }
       }
     }

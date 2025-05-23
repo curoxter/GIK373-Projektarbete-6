@@ -13,15 +13,17 @@
         <header>
             <nav>
             <ul>
-                <li><a href="#">Explotering</a></li>
-                <li><a href="#">Produktiv skog</a></li>
-                <li><a href="#">Skyddad natur</a></li>
+                <li><a href="#">Meny</a></li>
+                <li><a href="#explot">Exploatering</a></li>
+                <li><a href="#prodSkog">Produktiv skog</a></li>
+                <li><a href="#skyddNat">Skyddad natur</a></li>
+                <li><a href="#total">Jämförelse</a></li>
             </ul>
             </nav>
             <div class="headerImage">
                 <div class="headerContent">
                     <h1>Markens trilemma: Kan vi samtidigt skydda, bruka och bygga?</h1>
-                    <p>av samspelet mellan naturskydd, skogsbruk och exploatering i Sverige</p>
+                    <p>samspelet mellan naturskydd, skogsbruk och exploatering i Sverige</p>
                 </div>
             </div>
         </header>
@@ -31,7 +33,7 @@
         </div>
 
         <section>
-            <div class="featureCard">
+            <div class="featureCard" id="explot">
                 <h2>Exploatering</h2>
                 <div class="chartContainerInv">
                     <canvas id="bygg"></canvas>
@@ -43,7 +45,7 @@
     
     
         <section>
-            <div class="featureCard">
+            <div class="featureCard" id="prodSkog">
                 <h2>Produktiv skogsmark</h2>
                     <div class="kartor" id="skogStatestik"></div>
                 <p>Vår data visar inte den totala skogsvolymen utan hur stor andel av användbar mark som utgörs av produktiv skogsmark per län.
@@ -63,7 +65,7 @@
 
 
         <section>
-            <div class="featureCard">
+            <div class="featureCard" id="skyddNat">
             <h2>Skyddad natur</h2>
             <div class="kartor" id="hektarStatistik"></div>
             <p>Kartan visar fördelning av skyddad natur genom Sveriges landskap och avslöjar stora regionala skillnader. Norrbotten, trots att det är Sveriges största och mest "naturrika" län, har enbart 24% skyddad natur, vilket illustrerar att även i våra mest avlägsna områden konkurrerar olika markanväningar. 
@@ -75,7 +77,7 @@
         </section>
 
         <section>
-            <div class="featureCard">
+            <div class="featureCard" id="total">
                 <h2>Total andel ...</h2>
                 <div class="chartContainer">
                     <canvas id="compareChart"></canvas>
