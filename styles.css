@@ -19,6 +19,36 @@ body {
   padding: 0;
 }
 
+nav {
+  position: absolute; /* Ligger över bakgrundsbilden */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10; /* Säkerställer att menyn ligger över allt */
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 15px 20px;
+  flex-wrap: wrap;
+}
+
+nav li {
+  margin-right: 30px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
 .contentContainer {
   display: block;
   box-sizing: border-box;
@@ -207,6 +237,18 @@ div.user-select-none.svg-container {
   height: 500px;
 }
 
+.chartContainerInv {
+  position: relative;
+  width: 100%;
+}
+
+.chartContainer {
+  position: relative;
+  width: 100%;           /* Full bredd av förälderelementet */
+  max-width: 600px;      /* Valfritt maxbredd */
+  height: 300px;         /* Styr höjden på grafen */
+  margin: 0 auto; 
+}
 /* Make charts responsive */
 @media (min-width: 768px) {
 }

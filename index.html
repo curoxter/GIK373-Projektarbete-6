@@ -11,6 +11,13 @@
 <body>
     <div id="contentContainer">
         <header>
+            <nav>
+            <ul>
+                <li><a href="#">Explotering</a></li>
+                <li><a href="#">Produktiv skog</a></li>
+                <li><a href="#">Skyddad natur</a></li>
+            </ul>
+            </nav>
             <div class="headerImage">
                 <div class="headerContent">
                     <h1>Markens trilemma: Kan vi samtidigt skydda, bruka och bygga?</h1>
@@ -20,14 +27,17 @@
         </header>
 
         <div class="infoBox">
-            <p>Denna interaktiva visualisering visar hur Sveriges mark används för olika ändamål och hur dessa användingsområden konkurrerar med varandra</p>
+            <p>Denna interaktiva visualisering visar hur Sveriges mark används för olika ändamål och hur dessa användingsområden konkurrerar med varandra. </p>
         </div>
 
         <section>
             <div class="featureCard">
                 <h2>Exploatering</h2>
-                <canvas id="bygg"></canvas>
-                <p>Diagram som visar utvecklingen av exploaterad mark över tid.</p>
+                <div class="chartContainerInv">
+                    <canvas id="bygg"></canvas>
+                </div>
+                <p>Diagram som visar utvecklingen av exploaterad mark över tid. Diagrammet visar tydliga regionala skillnader i markanvänding. Stockholm har högst med 15% medans norra län som norrbotten enbart har 0.9%. Detta illustrerar hur befolkningstäthet och geograpi påverkar markanvändsnings konflikten i vårt tilemma. Norrbotten kan ha mer outnyttjad mark på grund av konflikter mellan skogsbruk och naturskydd. 
+                </p>
             </div>
         </section>
     
@@ -56,8 +66,21 @@
             <div class="featureCard">
             <h2>Skyddad natur</h2>
             <div class="kartor" id="hektarStatistik"></div>
-            <p>Jag är bara en simpel kvinna i en komplicerad värld UwU </p>
+            <p>Kartan visar fördelning av skyddad natur genom Sveriges landskap och avslöjar stora regionala skillnader. Norrbotten, trots att det är Sveriges största och mest "naturrika" län, har enbart 24% skyddad natur, vilket illustrerar att även i våra mest avlägsna områden konkurrerar olika markanväningar. 
+            
+            De södra länen visar ännu lägre skyddsanderar, vilket speglar intensivare markanvändning för jordbruk, bebyggelse och infrastruktur. Detta mönster belyser kärnan i vårt trilemma. Även där det verkar finnas "gott om plats" måste samhället välja mellan att skydda, bruka och bygga på marken. 
+        
+            Det här visar att naturskydd inte bara handlar om att "bevara vildmark" utan det handlar om medvetna val i hela landet om hur vii ska balansera ekologiska, ekonomiska och sociala behov på begränsad mark.</p>
         </div>
+        </section>
+
+        <section>
+            <div class="featureCard">
+                <h2>Total andel ...</h2>
+                <div class="chartContainer">
+                    <canvas id="compareChart"></canvas>
+                </div>
+            </div>
         </section>
 
         <footer>
