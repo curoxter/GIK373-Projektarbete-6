@@ -21,42 +21,12 @@ body {
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   color: var(--text-dark);
   background-color: var(--background);
-  margin: 0;
-  padding: 0;
 }
 
-/* nav {
-  position: absolute; 
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10; 
+main {
+  padding: 2rem;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 15px 20px;
-  flex-wrap: wrap;
-  background-color: #1b291e6c;
-}
-
-nav li {
-  margin-right: 30px;
-  display: inline;
-}
-
-nav a {
-  color: var(--butterscotch);
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-} */
 nav {
   background-color: var(--background);
   position: fixed;
@@ -127,8 +97,6 @@ nav a:hover {
 .contentContainer {
   display: block;
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
   background-color: #1b291e;
   color: #FCFCFC;
 }
@@ -188,25 +156,7 @@ h2 {
 } */
 
 
-/* Chart and content containers */
-.kartor, canvas {
-  width: 100%;
-  background-color: transparent;
 
-  border-radius: var(--border-radius);
-  margin: 1.5rem 0;
-  padding: 1.5rem;
-  
-}
-
-canvas {
-  display: block;
-
-  border-radius: var(--border-radius);
-  margin: 1rem 0;
-  padding: 0;
-  border: none;
-}
 
 .infoBox {
   background-color: var(--olive);
@@ -216,9 +166,7 @@ canvas {
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
-.infoBox p {
-  margin: 0;
-}
+
 
 
 header {
@@ -251,10 +199,7 @@ footer {
   border-top: 1px solid var(--tan);
   color: var(--tan);
 }
-
-p {
-  padding-left: 8px;
-} 
+ 
 section {
   margin: 1rem 0;
   position: relative;
@@ -278,36 +223,32 @@ section:last-of-type::after {
 section p {
   font-size: 0.95rem;
   line-height: 1.7;
-  margin: 1rem auto;
-  
 }
 
-
-.maplibregl-canvas {
-  transform: translateX(-80px) !important;
-  display: block;
-  border-radius: var(--border-radius);
-  padding: 0;
-  border: none;
+.kartor {
+  padding-top: 2.5rem;
+  font-size: 8pt;
 }
+
+.js-plotly-plot {
+  margin-top: -130px;
+  margin-left: -70px;
+}
+
 
 .featureCard {
-  flex: 1;
-  border-radius: 8px;
-  /* transition: transform 0.2s, box-shadow 0.2s; */
   scroll-margin-top: 50px;
 }
 
-.featureCard:hover {
-/*   transform: translateY(-5px); */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+.featureCard a {
+  color: var(--tan);
 }
 
-div.user-select-none.svg-container {
+/* div.user-select-none.svg-container {
   margin-top: -130px;
   padding-top: 0;
 
-}
+} */
 
 #bygg {
   height: 500px;
@@ -324,10 +265,22 @@ div.user-select-none.svg-container {
   width: 100%;           /* Full bredd av förälderelementet */
   max-width: 370px;      /* Valfritt maxbredd */
   height: 300px;         /* Styr höjden på grafen */
-  margin: 0 auto; 
+  padding: 1.5rem;
+}
+.linkStyle {
+  color:white;
+  margin: 1rem 0;
+  display: block;
+}
+.linkStyle:hover {
+  color: var(--tan);
 }
 /* Make charts responsive */
-@media (min-width: 768px) {
+@media (min-width: 992px) {
+  main {
+    padding: 0 5rem;
+  }
+
   .hideOnMobile{
     display: flex;
   }
@@ -336,3 +289,4 @@ div.user-select-none.svg-container {
     display: none;
   }
 }
+

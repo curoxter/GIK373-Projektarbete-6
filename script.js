@@ -405,7 +405,7 @@ async function calculateSkogData() {
 async function displaySkogDataOnMap() {
   const mapData = await calculateSkogData();
   
-  var data = [{
+  const data = [{
     type: "choroplethmap",
     locations: mapData.regions,
     featureidkey: "properties.name",
@@ -428,14 +428,15 @@ async function displaySkogDataOnMap() {
     ],
     colorbar: {
       title: "Produktiv skogsmark (%)",
-    tickvals: [10, 30, 50, 70, 90, 100],
-    ticktext: ["0–20%", "20–40%", "40–60%","60–80%", "80–100%"]
+      tickvals: [10, 30, 50, 70, 90, 100],
+      tickfont: {color: 'white'},
+      ticktext: ["0–20%", "20–40%", "40–60%","60–80%", "80–100%"]
     }
   }];
   
-  var layout = {
+  const layout = {
     map: {center: {lon: 17.3, lat: 63}, zoom: 3, style: 'dark'},
-    height: 550, width: 320,
+    height: 550, width: 450,
     title: "Andel produktiv skogsmark per län (2020)",
     paper_bgcolor: 'rgba(0,0,0,0)',
     plot_bgcolor: 'rgba(0,0,0,0)',
@@ -515,21 +516,29 @@ async function displayHektarDataOnMap() {
     colorbar: {
       title: "Skyddad Natur (%)",
     tickvals: [10, 30, 50, 70, 90, 100],
+    tickfont: {color: 'white'},
     ticktext: ["0–20%", "20–40%", "40–60%","60–80%", "80–100%"]
     }
   }];
 
-  var layout = {
+  
+
+
+
+  const layout = {
   map: {center: {lon: 17.3, lat: 63}, zoom: 3, style: 'dark'},
-  height: 550, width: 320,
+  width: 450,
+  height: 550,
   title: "Andel produktiv skogsmark per län (2020)",
   paper_bgcolor: 'rgba(0,0,0,0)',
   plot_bgcolor: 'rgba(0,0,0,0)',
   };
 
+
   Plotly.newPlot('hektarStatistik', data, layout, { displayModeBar: false });
 
-}
+};
+
 displayHektarDataOnMap();
 
 
