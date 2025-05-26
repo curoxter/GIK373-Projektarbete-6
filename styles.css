@@ -59,7 +59,12 @@ nav a {
 } */
 nav {
   background-color: var(--background);
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding-right: 50px;
 }
 
 nav ul {
@@ -68,6 +73,8 @@ nav ul {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin: 0; 
+  padding: 0;
 }
 
 nav li {
@@ -83,13 +90,11 @@ nav a {
   color: var(--butterscotch);
 }
 
+
 nav a:hover {
   background-color: var(--olive);
 }
 
-/* nav li:first-child {
-  margin-right: auto;
-} */
 
 .sidebar {
   position: fixed;
@@ -290,6 +295,7 @@ section p {
   flex: 1;
   border-radius: 8px;
   /* transition: transform 0.2s, box-shadow 0.2s; */
+  scroll-margin-top: 50px;
 }
 
 .featureCard:hover {
@@ -324,5 +330,9 @@ div.user-select-none.svg-container {
 @media (min-width: 768px) {
   .hideOnMobile{
     display: flex;
+  }
+
+  .hamburgerIcon {
+    display: none;
   }
 }

@@ -597,11 +597,12 @@ async function createCompareChart() {
 }
 createCompareChart();
 
-function showSidebar(){
-  const sidebar = document.querySelector('.sidebar')
-  sidebar.style.display = 'flex'
+function showSidebar(event) {
+  if (event) event.preventDefault(); // 🛑 Förhindrar scroll till toppen
+  document.querySelector('.sidebar').style.display = 'flex';
 }
-function hideSidebar(){
-  const sidebar = document.querySelector('.sidebar')
-  sidebar.style.display = 'none'
+
+function hideSidebar(event) {
+  if (event) event.preventDefault(); // 🛑 Samma här
+  document.querySelector('.sidebar').style.display = 'none';
 }
