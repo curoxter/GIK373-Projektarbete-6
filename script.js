@@ -270,6 +270,94 @@ const regionCodes = {
 };
 
 
+// bebyggelsekarta
+async function calculateByggData() {
+  const byggData = await fetch(byggUrl, {
+    method: "POST",
+    body: JSON.stringify(byggQuery)
+  }).then(res => res.json());
+
+  const landYtaData = await fetch(landYtaUrl, {
+    method: "POST",
+    body: JSON.stringify(landYtaQuery)
+  }).then(res => res.json());
+
+  const bygg = byggData.data.map(item => ({
+    region: item.key[0],
+    value: parseFloat(item.values[0])
+  }));
+
+  const landYta = landYtaData.data.map(item => ({
+    region: item.key[0],
+    area: parseFloat(item.values[0])
+  }));
+
+
+  const result = bygg.map(item => {
+    const regionName = regionCodes[item.region];
+    const yta = landYta.find(l => l.region === item.region)?.area;
+    const procent = (item.value / yta) * 100;
+    return {
+      region: regionName,
+      value: parseFloat(procent.toFixed(2))
+    };
+  });
+
+  return {
+    regions: result.map(r => r.region),
+    values: result.map(r => r.value)
+  };
+
+}
+
+async function displayByggDataOnMap() {
+  const mapData = await calculateByggData();
+  
+  const data = [{
+    type: "choroplethmap",
+    locations: mapData.regions,
+    featureidkey: "properties.name",
+    z: mapData.values,
+    geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
+    zmin: 0,
+    zmax: 90,
+    colorscale:  [  
+    [0.0, "#7F0000"], 
+
+    [0.2, "#FF8000"],
+
+    [0.4, "#FFF000"],
+
+    [0.6, "#E0F909"],
+   
+    [0.8, "#00C943"],
+   
+    [1.0, "#06B800"]
+    ],
+    colorbar: {
+      title: "Bebbyggelse (%)",
+      tickvals: [10, 30, 50, 70, 90, 100],
+      tickfont: {color: 'white'},
+      ticktext: ["0–20%", "20–40%", "40–60%","60–80%", "80–100%"]
+    }
+  }];
+  
+  const layout = {
+    map: {center: {lon: 17.3, lat: 63}, zoom: 3, style: 'dark'},
+    height: 550, width: 450,
+    title: "Andel bebyggelse per län (2020)",
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+  };
+  
+  Plotly.newPlot('byggStatistik', data, layout, { displayModeBar: false});
+}
+
+// Bara ett anrop till displayskogDataOnMap
+displayByggDataOnMap();
+
+
+/* 
 
 //Bebyggelse i hektar
   async function printByggChart(byggData) {
@@ -352,7 +440,7 @@ const regionCodes = {
   fetch(request)
     .then((response) => response.json())
     .then(printByggChart);
-
+ */
 
 
 
@@ -542,8 +630,113 @@ async function displayHektarDataOnMap() {
 displayHektarDataOnMap();
 
 
-// diagram över total andel (hela Sverige) bebyggelse, produktiv skogsmark och skyddad natur
+//diagram för alla kartor med län
 async function createCompareChart() {
+  const [byggData, skogData, hektarData] = await Promise.all([
+    fetch(byggUrl, { method: 'POST', body: JSON.stringify(byggQuery) }).then(res => res.json()),
+    fetch(skogUrl, { method: 'POST', body: JSON.stringify(skogQuery) }).then(res => res.json()),
+    fetch(hektarUrl, { method: 'POST', body: JSON.stringify(hektarQuery) }).then(res => res.json()),
+  ]);
+
+  const landYtaData = await fetch(landYtaUrl, { method: 'POST', body: JSON.stringify(landYtaQuery) })
+    .then(res => res.json());
+
+  const landYta = landYtaData.data.reduce((acc, item) => {
+    acc[item.key[0]] = parseFloat(item.values[0]);
+    return acc;
+  }, {});
+
+  function procentData(data, type) {
+    return data.data.map(item => {
+      const code = item.key[0];
+      const name = regionCodes[code] || code;
+      const yta = landYta[code] || 1;
+      const value = parseFloat(item.values[0]);
+      const procent = (value / yta) * 100;
+      return { region: name, [type]: parseFloat(procent.toFixed(2)) };
+    });
+  }
+
+  const bygg = procentData(byggData, 'bygg');
+  const skog = procentData(skogData, 'skog');
+  const hektar = procentData(hektarData, 'skydd');
+
+  // Kombinera data per region
+  const combined = {};
+  [...bygg, ...skog, ...hektar].forEach(item => {
+    if (!combined[item.region]) combined[item.region] = { bygg: 0, skog: 0, skydd: 0 };
+    combined[item.region] = { ...combined[item.region], ...item };
+  });
+
+  const labels = Object.keys(combined);
+  const byggArr = labels.map(l => combined[l].bygg);
+  const skogArr = labels.map(l => combined[l].skog);
+  const skyddArr = labels.map(l => combined[l].skydd);
+
+  const canvas = document.getElementById('compareChart');
+  canvas.height = 20 * labels.length;
+
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Bebyggd mark (%)',
+          data: byggArr,
+          backgroundColor: '#1b9e77'
+        },
+        {
+          label: 'Produktiv skogsmark (%)',
+          data: skogArr,
+          backgroundColor: '#d95f02'
+        },
+        {
+          label: 'Skyddad natur (%)',
+          data: skyddArr,
+          backgroundColor: '#7570b3'
+        },
+        {
+          label: '(X-Axeln beskriver hela länets landyta i %)',
+          backgroundColor: '#00000000'
+        }
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      scales: {
+        x: {
+          stacked: true,
+          ticks: {
+            callback: value => value + '%',
+            color: '#fff'
+          }
+        },
+        y: {
+          stacked: true,
+          ticks: {
+            color: '#fff',
+            font: { size: 10 }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: '#fff'
+          }
+        }
+      }
+    }
+  });
+}
+
+createCompareChart();
+
+
+// diagram över total andel (hela Sverige) bebyggelse, produktiv skogsmark och skyddad natur
+async function createtotalChart() {
   const [byggRes, skogRes, hektarRes, landYtaRes] = await Promise.all([
     fetch(byggUrl, {method: 'POST', body: JSON.stringify(byggQuery)}).then(res => res.json()),
     fetch(skogUrl, {method: 'POST', body: JSON.stringify(skogQuery)}).then(res => res.json()),
@@ -566,9 +759,9 @@ async function createCompareChart() {
   const labels = ["Bebyggd mark", "Produktiv skogsmark", "Skyddad natur"];
   const data = [procentBygg, procentSkog, procentSkydd];
 
-  const compareChart = document.getElementById('compareChart');
+  const totalChart = document.getElementById('totalChart');
 
-  new Chart(compareChart, {
+  new Chart(totalChart, {
      type: 'bar',
     data: {
       labels: labels,
@@ -604,7 +797,7 @@ async function createCompareChart() {
     }
   });
 }
-createCompareChart();
+createtotalChart();
 
 function showSidebar(event) {
   if (event) event.preventDefault(); // 🛑 Förhindrar scroll till toppen

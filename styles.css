@@ -223,6 +223,7 @@ section:last-of-type::after {
 section p {
   font-size: 0.95rem;
   line-height: 1.7;
+  padding: 17px;
 }
 
 .kartor {
@@ -258,6 +259,7 @@ section p {
   position: relative;
   max-width: 370px;
   height: 550px;
+  padding: 1.5rem 0;
 }
 
 .chartContainer {
@@ -265,20 +267,22 @@ section p {
   width: 100%;           /* Full bredd av förälderelementet */
   max-width: 370px;      /* Valfritt maxbredd */
   height: 300px;         /* Styr höjden på grafen */
-  padding: 1.5rem;
+  padding: 1.5rem 0;
 }
 .linkStyle {
   color:white;
-  margin: 1rem 0;
+  margin: 20px 0;
+  padding-left: 17px; 
   display: block;
 }
+
 .linkStyle:hover {
   color: var(--tan);
 }
 /* Make charts responsive */
 @media (min-width: 992px) {
   main {
-    padding: 0 5rem;
+    padding: 0 7rem;
   }
 
   .hideOnMobile{
@@ -288,5 +292,27 @@ section p {
   .hamburgerIcon {
     display: none;
   }
+
+  .cardContent {
+    display: flex;
+    align-items: flex-end;
+    gap: 3rem;
+  }
+  .chartContainer {
+    max-width: 600px;
+    height: 600px;
+    
+  }
+  .chartContainerInv {
+    height: 600px;
+    
+  }
+.lodText{
+  display: flex;
+}
+
+p .responsiveText{
+  display: flex;
+}
 }
 
