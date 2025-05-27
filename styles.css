@@ -143,8 +143,7 @@ h2 {
   font-size: 1.4rem;
   margin-top: 2rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--tan);
-  color: var(--butterscotch);
+  color: var(--background);
   margin-left: 18px;
 }
 
@@ -224,6 +223,7 @@ section p {
   font-size: 0.95rem;
   line-height: 1.7;
   padding: 17px;
+  color: var(--background);
 }
 
 .kartor {
@@ -242,7 +242,7 @@ section p {
 }
 
 .featureCard a {
-  color: var(--tan);
+  color: var(--olive);
 }
 
 /* div.user-select-none.svg-container {
@@ -279,6 +279,15 @@ section p {
 .linkStyle:hover {
   color: var(--tan);
 }
+.referensH2{
+  color: var(--butterscotch);
+}
+.card {
+  background-color: #979D80;
+  border-radius: 5px;
+  box-shadow: 0 px 8 px 0 rgba(0,0,0, 0.2);
+  padding: 3px 17px;
+}
 /* Make charts responsive */
 @media (min-width: 992px) {
   main {
@@ -296,7 +305,7 @@ section p {
   .cardContent {
     display: flex;
     align-items: flex-end;
-    gap: 3rem;
+    gap: 5rem;
   }
   .chartContainer {
     max-width: 600px;
@@ -304,7 +313,7 @@ section p {
     
   }
   .chartContainerInv {
-    height: 600px;
+    height: 100%;
     
   }
 .lodText{
@@ -313,6 +322,13 @@ section p {
 
 p .responsiveText{
   display: flex;
+}
+
+.card {
+  background-color: #979D80;
+  border-radius: 5px;
+  box-shadow: 0 px 8 px 0 rgba(0,0,0, 0.2);
+  padding: 3px 17px;
 }
 }
 

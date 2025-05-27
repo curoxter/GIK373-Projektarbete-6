@@ -320,25 +320,21 @@ async function displayByggDataOnMap() {
     z: mapData.values,
     geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
     zmin: 0,
-    zmax: 90,
+    zmax: 15,
     colorscale:  [  
-    [0.0, "#7F0000"], 
+    [0, "#E9E9E9"], 
 
-    [0.2, "#FF8000"],
+    [0.33, "#8EB1B9"],
 
-    [0.4, "#FFF000"],
-
-    [0.6, "#E0F909"],
+    [0.66, "#4A7E89"],
    
-    [0.8, "#00C943"],
-   
-    [1.0, "#06B800"]
+    [1, "#3A6A74"]
     ],
     colorbar: {
       title: "Bebbyggelse (%)",
-      tickvals: [10, 30, 50, 70, 90, 100],
+      tickvals: [0, 5, 10, 15],
       tickfont: {color: 'white'},
-      ticktext: ["0–20%", "20–40%", "40–60%","60–80%", "80–100%"]
+      ticktext: ["0%", "5%", "10%", "15+%"]
     }
   }];
   
@@ -357,97 +353,7 @@ async function displayByggDataOnMap() {
 displayByggDataOnMap();
 
 
-/* 
 
-//Bebyggelse i hektar
-  async function printByggChart(byggData) {
-    // Hämta landyta data
-    const landYtaData = await fetch(landYtaUrl, {
-      method: "POST",
-      body: JSON.stringify(landYtaQuery)
-    }).then(res => res.json());
-    
-    const landYta = landYtaData.data.map(item => ({
-      region: item.key[0],
-      area: parseFloat(item.values[0])
-    }));
-  
-    const years = byggData.data;
-    
-    const result = years.map(item => {
-      const regionCode = item.key[0];
-      const regionName = regionCodes[regionCode] || regionCode;
-      const matchedRegion = landYta.find(l => l.region === regionCode);
-      const yta = matchedRegion ? matchedRegion.area : 1;
-      const value = parseFloat(item.values[0]);
-      const procent = (value / yta) * 100;
-      return {
-        region: regionName,
-        value: parseFloat(procent.toFixed(2))
-      };
-    });
-    
-    const labels = result.map(r => r.region);
-    const data = result.map(r => r.value);
-    
-    const datasets = [{
-      label: 'Andel bebyggd mark',
-      data: data,
-      backgroundColor: 'hsla(166, 69%, 36%, 0.5)',
-      hoverBackgroundColor: 'hsla(166, 69%, 36%, 1)'
-      
-    }];
-    
-    const canvas = document.getElementById('bygg');
-    canvas.height = 20 * labels.length;
-    
-    new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: datasets
-      },
-      options: {
-        indexAxis: "y",
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            ticks: {
-              font: {
-                size: 10
-              },
-              color: '#ffffff'
-            }
-          },
-          x: {
-            ticks: {
-              callback: value => value + '%',
-              color: '#ffffff'
-            }
-          }
-        }
-      }
-    });
-  }
-  
-  // Anropa funktionen
-  const request = new Request(byggUrl, {
-    method: 'POST',
-    body: JSON.stringify(byggQuery)
-  });
-  
-  fetch(request)
-    .then((response) => response.json())
-    .then(printByggChart);
- */
-
-
-
-
-
-
-    
 //SKOGKARTA
 
 // Gör bara ett anrop till displayskogDataOnMap, som i sin tur anropar calculateskogData
@@ -502,17 +408,12 @@ async function displaySkogDataOnMap() {
     zmin: 0,
     zmax: 90,
     colorscale:  [  
-    [0.0, "#7F0000"], 
-
-    [0.2, "#FF8000"],
-
-    [0.4, "#FFF000"],
-
-    [0.6, "#E0F909"],
-   
-    [0.8, "#00C943"],
-   
-    [1.0, "#06B800"]
+      [0.0, "#CCB8C0"],
+      [0.2, "#B295A1"],
+      [0.4, "#987182"],
+      [0.6, "#765664"],
+      [0.8, "#533C46"],
+      [1.0, "#3B2B32"]
     ],
     colorbar: {
       title: "Produktiv skogsmark (%)",
@@ -587,31 +488,20 @@ async function displayHektarDataOnMap() {
     z: mapData.values,
     geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
     zmin: 0,
-    zmax: 90,
-    colorscale:  [  
-    [0.0, "#7F0000"], 
-
-    [0.2, "#FF8000"],
-
-    [0.4, "#FFF000"],
-
-    [0.6, "#E0F909"],
-   
-    [0.8, "#00C943"],
-   
-    [1.0, "#06B800"]
-    ],
+    zmax: 30,
+colorscale:  [  
+  [0.0, "#DCECC7"],  
+  [0.33, "#AABD8C"], 
+  [0.66, "#7E985F"], 
+  [1.0, "#4F6039"]   
+],
     colorbar: {
       title: "Skyddad Natur (%)",
-    tickvals: [10, 30, 50, 70, 90, 100],
+    tickvals: [0, 5, 10, 15, 20, 25, 30],
     tickfont: {color: 'white'},
-    ticktext: ["0–20%", "20–40%", "40–60%","60–80%", "80–100%"]
+    ticktext: ["0%", "5%", "10%", "15%", "20%", "25%", "30%"]
     }
   }];
-
-  
-
-
 
   const layout = {
   map: {center: {lon: 17.3, lat: 63}, zoom: 3, style: 'dark'},
@@ -622,9 +512,7 @@ async function displayHektarDataOnMap() {
   plot_bgcolor: 'rgba(0,0,0,0)',
   };
 
-
   Plotly.newPlot('hektarStatistik', data, layout, { displayModeBar: false });
-
 };
 
 displayHektarDataOnMap();
@@ -674,7 +562,7 @@ async function createCompareChart() {
   const skyddArr = labels.map(l => combined[l].skydd);
 
   const canvas = document.getElementById('compareChart');
-  canvas.height = 20 * labels.length;
+  canvas.height = 30 * labels.length;
 
   new Chart(canvas, {
     type: 'bar',
@@ -684,17 +572,17 @@ async function createCompareChart() {
         {
           label: 'Bebyggd mark (%)',
           data: byggArr,
-          backgroundColor: '#1b9e77'
+          backgroundColor: '#4A7E89'
         },
         {
           label: 'Produktiv skogsmark (%)',
           data: skogArr,
-          backgroundColor: '#d95f02'
+          backgroundColor: '#765664'
         },
         {
           label: 'Skyddad natur (%)',
           data: skyddArr,
-          backgroundColor: '#7570b3'
+          backgroundColor: '#7E985F'
         },
         {
           label: '(X-Axeln beskriver hela länets landyta i %)',
@@ -723,8 +611,10 @@ async function createCompareChart() {
       },
       plugins: {
         legend: {
+          align: 'start',
           labels: {
-            color: '#fff'
+            color: '#fff',
+            align: 'start'
           }
         }
       }
@@ -768,7 +658,7 @@ async function createtotalChart() {
       datasets: [{
         label: "Andel av Sveriges yta (%)",
         data: data,
-        backgroundColor: ['#1b9e77', '#d95f02', '#7570b3']
+        backgroundColor: ['#4A7E89', '#765664', '#7E985F']
       }]
     },
     options: {
@@ -789,22 +679,32 @@ async function createtotalChart() {
           }
         }
       },
-      plugins: {
-        legend: {
-          display: false //tar bort färgrutan i titeln
-        }
+  plugins: {
+    legend: {
+      display: false // Tar bort färgrutor (legend) under diagrammet
+    },
+    title: {
+      display: true,
+      text: 'Total andel i hela Sverige', 
+      color: '#000',
+      font: {
+        size: 16
       }
+    }
+    }
     }
   });
 }
 createtotalChart();
 
+
+// Förhindrar scroll till toppen vid klick på meny
 function showSidebar(event) {
-  if (event) event.preventDefault(); // 🛑 Förhindrar scroll till toppen
+  if (event) event.preventDefault(); 
   document.querySelector('.sidebar').style.display = 'flex';
 }
 
 function hideSidebar(event) {
-  if (event) event.preventDefault(); // 🛑 Samma här
+  if (event) event.preventDefault(); 
   document.querySelector('.sidebar').style.display = 'none';
 }
