@@ -11,107 +11,160 @@
     
     <title>Markens trilemma - Grupp 6</title>
 </head>
-<body>
+<body >
     <div id="contentContainer">
         <header>
             <nav>
+            <div class="container">
             <ul class="sidebar">
-                <li onclick="hideSidebar(event)"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ED9B40"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                <li><a href="#explot">Exploatering</a></li>
+                <li onclick="hideSidebar(event)"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FCFCFC"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+                <li><a href="#explot">Bebyggelse</a></li>
                 <li><a href="#prodSkog">Produktiv skog</a></li>
                 <li><a href="#skyddNat">Skyddad natur</a></li>
                 <li><a href="#compare">Jämförelse</a></li>
                 <li><a href="#ref">Referenser</a></li>
             </ul>
+
             <ul>
-                <li class="hideOnMobile"><a href="#explot">Bebyggelse</a></li>
-                <li class="hideOnMobile"><a href="#prodSkog">Produktiv skog</a></li>
-                <li class="hideOnMobile"><a href="#skyddNat">Skyddad natur</a></li>
-                <li class="hideOnMobile"><a href="#compare">Jämförelse</a></li>
-                <li class="hideOnMobile"><a href="#ref">Referenser</a></li>
-                <li class="hamburgerIcon" onclick="showSidebar(event)"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ED9B40"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+                <li class=" hideOnMobile"><a href="#explot">Bebyggelse</a></li>
+                <li class=" hideOnMobile"><a href="#prodSkog">Produktiv skog</a></li>
+                <li class=" hideOnMobile"><a href="#skyddNat">Skyddad natur</a></li>
+                <li class=" hideOnMobile"><a href="#compare">Jämförelse</a></li>
+                <li class=" hideOnMobile"><a href="#ref">Referenser</a></li>
+                <li class=" hamburgerIcon" onclick="showSidebar(event)"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FCFCFC"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
             </ul>
             </nav>
-            <div class="headerImage">
-                <div class="headerContent">
+            <div class="headerImage col-12">
+                <div class="headerContent col-xs-10">
                     <h1>Markens trilemma: Kan vi samtidigt skydda, bruka och bygga?</h1>
-                    <p>samspelet mellan naturskydd, skogsbruk och exploatering i Sverige</p>
+                    <h3 class="infoHeader">Samspelet mellan naturskydd, skogsbruk och bebyggelse i Sverige</h3>
                 </div>
+            </div>
             </div>
         </header>
 
         <main class="container">
+           
+        <div class="row justify-content-center" >   
+    
+<div class="col-xs-1"></div>
+        <div class=" col-xs-10">
+            <div class="infoBox">
+            <p>Sverige är ett land rik på natur med livfyllda städer och vidsträckta skogar som lockar vandrare från hela världen. Men bakom denna vackra fasad döljer sig en komplex balansakt: hur fördelar vi egentligen vårt markområde mellan bebyggelse, produktiv skogsbruk och naturskydd?<br>
+            När städer växer och befolkning ökar behöver vi samtidigt mer skog. Blir markanvändningen en alltmer pressande fråga. Tar vi för mycket plats från naturen när vi bygger? Skyddar vi tillräckligt av våra värdefulla ekosystem? Hur mycket av våra skogar kan vi egentligen bruka hållbart? <br>
+            Genom interaktiva kartor och djupgående dataanalys utforskar vi Sveriges markfördelning och avslöjar mönster som få får se. Följ med på en resa genom data som visar hur Sverige hanterar den eviga konflikten mellan utveckling, bevarande och skydd. Upptäck vad sifforna egentligen berättar om vårt lands framtid. 
+             </p>
+            </div>
 
-        <div class="infoBox">
-            <p>Dessa interaktiva visualisering visar hur Sveriges mark används för olika ändamål och hur dessa användingsområden konkurrerar med varandra. </p>
-        </div>
-
-        <section>
-            <div class="card">
-            <div class="featureCard" id="explot">
-                <h2>Bebyggd mark</h2>   
-                <div class="lodText">      
+        <section class="">
+            <div class="card" id="explot">
+                <h2>Bebyggd mark</h2>                   
                 <div class="kartor" id="byggStatistik"> </div>
-                <p class="responsiveText">Diagram som visar utvecklingen av bebyggd mark år 2020. De numeriska värderna som representeras genom färgkodning har skalats ner då värderna är relativt låga i alla län. Diagrammet visar tydliga regionala skillnader i markanvänding. Stockholm har högst med 15% medans norra län som norrbotten enbart har 0.9%. Detta illustrerar hur befolkningstäthet och geografi påverkar markanvändsnings konflikten i vårt tilemma. Norrbotten kan ha mer outnyttjad mark på grund av konflikter mellan skogsbruk och naturskydd. 
-                </p>
+                <ul>
+                    <li>Den här interaktiva kartan visar bebyggdmark år 2020.</li>
+                    <li>Numeriska värden har skalats ner på grund av relativt låga värden i alla län.</li>
+                    <li>Stockholm har högst bebyggdmark med 15%.</li>
+                    <li>Norrland har lägst med enbart 0.9% bebyggdmark.</li>
+                    <li>Olika regioner har olika utmaningar i markanvändningskonflikten.</li>
+                </ul>
+                <div class="accordion">
+                    <div class="contentBx">
+                        <div class="label">Läs mer</div>
+                        <div class="content">
+                            <p> Diagram som visar utvecklingen av bebyggd mark år 2020. De numeriska värderna som representeras genom färgkodning har skalats ner då värderna är relativt låga i alla län. Diagrammet visar tydliga regionala skillnader i markanvänding. Stockholm har högst med 15% medans norra län som norrbotten enbart har 0.9%. Detta illustrerar hur befolkningstäthet och geografi påverkar markanvändsnings konflikten i vårt tilemma. Norrbotten kan ha mer outnyttjad mark på grund av konflikter mellan skogsbruk och naturskydd.  </p>
+                        </div>
+                    </div>
                 </div>
-            </div> 
-        </div>
+            </div>   
         </section>
-    
+
     
         <section>
-            <div class="card">
-            <div class="featureCard" id="prodSkog">
+            <div class="card" id="prodSkog">
                 <h2>Produktiv skogsmark</h2>
                 <div class="lodText">
                     <div class="kartor" id="skogStatestik"></div>
-                    <p class="responsiveText">Vår data visar inte den totala skogsvolymen utan hur stor andel av användbar mark som utgörs av produktiv skogsmark per län.
-                    Produktiv skogsmark definieras som mark som kan producera minst en kubikmeter virke per hektar och år(SCB) - alltså mark som är lämplig för skogsbruk.
-                    Varför ser resultaten ut som de gör?
-                    Gävleborg är Sveriges skogstätaste län med 89% av landytan bestående av skogsmark, medan Norrbotten "bara" har 58% trots att det är Sveriges största skogsområde.
-                    Förklaringen: Norrbotten har enorma arealer fjäll, myr och improduktiv skogsmark som inte räknas som produktiv. När vi beräknar andel produktiv skogsmark av total landareal får därför:
-                    
-                    Gävleborg: Hög andel eftersom nästan all mark är skogslämplig
-                    Norrbotten: Lägre andel eftersom stora delar består av fjällterräng som inte kan brukas
-                    
-                    Detta visar den verkliga markanvändningskonflikten i vårt trilemma - i Gävleborg konkurrerar nästan all användbar mark mellan skydda, bruka och bygga, medan Norrbotten har mer "outnyttjad" mark i form av fjäll och myr.</p>        
+                    <ul>
+                        <li> Kartan visar andel produktiv skogsmark av användbar mark per län, inte total skogsvolym.</li>
+                        <li>Avser mark lämlig för skogsbruk.</li>
+                        <li>Gävleborg är Sveriges skogstätaste län med 89% produktiv skogsmark.</li>
+                        <li>Norrbotten har 58% produktiv skogsmark.</li>
+                        <li>Beräkning av andel produktiv skogsmark av total landareal.</li>
+                        <li>Gävleborg konkurrerar nästan all användbar mark mellan skydda, bruka och bygga.</li>
+                        <li>Norbotten har mer "outnyttjad" mark i form av fjäll och myr.</li>
+                    </ul>      
+                </div>
+                <div class="accordion">
+                    <div class="contentBx">
+                        <div class="label">Läs mer om produktiv skog</div>
+                        <div class="content">
+                            <p> Vår data visar inte den totala skogsvolymen utan hur stor andel av användbar mark som utgörs av produktiv skogsmark per län.
+                                Produktiv skogsmark definieras som mark som kan producera minst en kubikmeter virke per hektar och år(SCB) - alltså mark som är lämplig för skogsbruk.
+                                Varför ser resultaten ut som de gör?
+                                Gävleborg är Sveriges skogstätaste län med 89% av landytan bestående av skogsmark, medan Norrbotten "bara" har 58% trots att det är Sveriges största skogsområde.
+                                Förklaringen: Norrbotten har enorma arealer fjäll, myr och improduktiv skogsmark som inte räknas som produktiv. När vi beräknar andel produktiv skogsmark av total landareal får därför:
+                                
+                                Gävleborg: Hög andel eftersom nästan all mark är skogslämplig
+                                Norrbotten: Lägre andel eftersom stora delar består av fjällterräng som inte kan brukas
+                                
+                                Detta visar den verkliga markanvändningskonflikten i vårt trilemma - i Gävleborg konkurrerar nästan all användbar mark mellan skydda, bruka och bygga, medan Norrbotten har mer "outnyttjad" mark i form av fjäll och myr
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
-        </div>
-    </div>
         </section>
 
 
 
 
         <section>
-            <div class="card">
-            <div class="featureCard" id="skyddNat">
+            <div class="card" id="skyddNat">
             <h2>Skyddad natur</h2>
-            <div class="lodText">
-            <div class="kartor" id="hektarStatistik"></div>
-            <p class="responsiveText">Kartan visar fördelning av skyddad natur genom Sveriges landskap och avslöjar stora regionala skillnader. Då högsta värdet ligger på 24% har vi valt att skala ner värderna för att få en bättre helhet. Norrbotten, trots att det är Sveriges största och mest "naturrika" län, har enbart 24% skyddad natur, vilket illustrerar att även i våra mest avlägsna områden konkurrerar olika markanväningar. 
-            
-            De södra länen visar ännu lägre skyddsanderar, vilket speglar intensivare markanvändning för jordbruk, bebyggelse och infrastruktur. Detta mönster belyser kärnan i vårt trilemma. Även där det verkar finnas "gott om plats" måste samhället välja mellan att skydda, bruka och bygga på marken. 
-        
-            Det här visar att naturskydd inte bara handlar om att "bevara vildmark" utan det handlar om medvetna val i hela landet om hur vii ska balansera ekologiska, ekonomiska och sociala behov på begränsad mark.</p>
-        </div>
-    </div>
-</div>
+                <div class="lodText">
+                    <div class="kartor" id="hektarStatistik"></div>
+                    <ul>
+                        <li> Kartan visar regionala skillnader i fördelning av skyddad natur genom Sveriges landskap.</li>
+                        <li>Värderna har skalats ner från högsta värdet på 24% för bättre helhetsbild.</li>
+                        <li>Norrbotten har 24% skyddad natur.</li>
+                        <li>Västernorrland har 1.97% skyddad natur.</li>
+                        <li>Naturskydd handlar inte bara om att "bevara vildmark".</li>
+                    </ul>
+                </div>
+                <div class="accordion">
+                    <div class="contentBx">
+                        <div class="label">Läs mer</div>
+                        <div class="content">
+                            <p> Kartan visar fördelning av skyddad natur genom Sveriges landskap och avslöjar stora regionala skillnader. Då högsta värdet ligger på 24% har vi valt att skala ner värderna för att få en bättre helhet. Norrbotten, trots att det är Sveriges största och mest "naturrika" län, har enbart 24% skyddad natur, vilket illustrerar att även i våra mest avlägsna områden konkurrerar olika markanväningar. 
+                                De södra länen visar ännu lägre skyddsanderar, vilket speglar intensivare markanvändning för jordbruk, bebyggelse och infrastruktur. Detta mönster belyser kärnan i vårt trilemma. Även där det verkar finnas "gott om plats" måste samhället välja mellan att skydda, bruka och bygga på marken. 
+                                Det här visar att naturskydd inte bara handlar om att "bevara vildmark" utan det handlar om medvetna val i hela landet om hur vii ska balansera ekologiska, ekonomiska och sociala behov på begränsad mark.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section>
-            <div class="featureCard" id="compare">
+            <div class="card" id="compare">
                 <h2>Jämförelse</h2>
                 <div class="cardContent">
-                <div class="chartContainerInv">
-                    <canvas id="compareChart"></canvas>
-                </div>
-                <div class="chartContainer">
+                    <div class="chartContainerInv">
+                        <canvas id="compareChart"></canvas>
+                    </div>
+                    <div class="chartContainer">
                     <canvas id="totalChart"></canvas>
+                    </div>
                 </div>
-                </div>
-                <p> här är en total sammanfattning av all data </p>
+                    <div class="accordion">
+                        <div class="contentBx">
+                            <div class="label">Läs mer</div>
+                            <div class="content">
+                                <p> här är en total sammanfattning av all data </p>
+                            </div>
+                        </div>
+                    </div>               
             </div>
         </section>
 
@@ -126,7 +179,7 @@
     </section>
 
 
-        </main>
+        
         <footer>
             <p> 2025 Grupp 6 | Data från SCB</p>
         </footer>
@@ -134,6 +187,10 @@
         <script src="script.js"></script>
 
     </div>
+        </div>
+      <div class="col-xs-1"></div>
+   </div> 
+    </main>
 </body>
 </html>
 

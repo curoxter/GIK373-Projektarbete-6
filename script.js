@@ -333,8 +333,8 @@ async function displayByggDataOnMap() {
     colorbar: {
       title: "Bebbyggelse (%)",
       tickvals: [0, 5, 10, 15],
-      tickfont: {color: '#1b291e'},
-      ticktext: ["0%", "5%", "10%", "15+%"]
+      tickfont: {color: '#000'},
+      ticktext: ["0%", "5%", "10%", "15%"]
     }
   }];
   
@@ -406,29 +406,27 @@ async function displaySkogDataOnMap() {
     z: mapData.values,
     geojson: "https://raw.githubusercontent.com/okfse/sweden-geojson/refs/heads/master/swedish_regions.geojson",
     zmin: 0,
-    zmax: 90,
+    zmax: 80,
     colorscale:  [  
-      [0.0, "#CCB8C0"],
-      [0.2, "#B295A1"],
-      [0.4, "#987182"],
-      [0.6, "#765664"],
-      [0.8, "#533C46"],
-      [1.0, "#3B2B32"]
+      [0, "#CCB8C0"],
+      [0.16, "#B295A1"],
+      [0.32, "#987182"],
+      [0.64, "#765664"],
+      [1, "#3B2B32"]
     ],
     colorbar: {
       title: "Produktiv skogsmark (%)",
-      tickvals: [10, 30, 50, 70, 90, 100],
-      tickfont: {color: '#1b291e'},
-      ticktext: ["0–20%", "20–40%", "40–60%","60–80%", "80–100%"]
+      tickvals: [0,20, 40, 60, 80],
+      tickfont: {color: '#000'},
+      ticktext: ["0%", "20%", "40%", "60%", "80%"]
     }
   }];
   
   const layout = {
     map: {center: {lon: 17.3, lat: 63}, zoom: 3, style: 'dark'},
     height: 550, width: 450,
-    title: "Andel produktiv skogsmark per län (2020)",
     paper_bgcolor: 'rgba(0,0,0,0)',
-    plot_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)'
   };
   
   Plotly.newPlot('skogStatestik', data, layout, { displayModeBar: false});
@@ -498,7 +496,7 @@ colorscale:  [
     colorbar: {
       title: "Skyddad Natur (%)",
     tickvals: [0, 5, 10, 15, 20, 25, 30],
-    tickfont: {color: '#1b291e'},
+    tickfont: {color: '#000'},
     ticktext: ["0%", "5%", "10%", "15%", "20%", "25%", "30%"]
     }
   }];
@@ -598,13 +596,13 @@ async function createCompareChart() {
           stacked: true,
           ticks: {
             callback: value => value + '%',
-            color: '#fff'
+            color: '#000'
           }
         },
         y: {
           stacked: true,
           ticks: {
-            color: '#fff',
+            color: '#000',
             font: { size: 10 }
           }
         }
@@ -613,7 +611,7 @@ async function createCompareChart() {
         legend: {
           align: 'start',
           labels: {
-            color: '#fff',
+            color: '#000',
             align: 'start'
           }
         }
@@ -670,12 +668,12 @@ async function createtotalChart() {
           max: 100,
           ticks: {
             callback: val => val + '%',
-            color: '#fff'
+            color: '#000'
           }
         },
         x: {
           ticks: {
-            color: '#fff'
+            color: '#000'
           }
         }
       },
@@ -686,7 +684,7 @@ async function createtotalChart() {
     title: {
       display: true,
       text: 'Total andel i hela Sverige', 
-      color: '#FFF',
+      color: '#000',
       font: {
         size: 16
       }
@@ -708,3 +706,21 @@ function hideSidebar(event) {
   if (event) event.preventDefault(); 
   document.querySelector('.sidebar').style.display = 'none';
 }
+
+
+
+
+//accordian shit
+
+const accordions = document.querySelectorAll(".accordion .contentBx");
+
+accordions.forEach((accordion) => {
+  accordion.querySelector(".label").addEventListener("click", () => {
+    accordion.classList.toggle("active");
+    
+   
+    const label = accordion.querySelector(".label");
+    const expanded = accordion.classList.contains("active");
+    label.setAttribute("aria-expanded", expanded);
+  });
+});
