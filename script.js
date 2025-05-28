@@ -333,7 +333,7 @@ async function displayByggDataOnMap() {
     colorbar: {
       title: "Bebbyggelse (%)",
       tickvals: [0, 5, 10, 15],
-      tickfont: {color: 'white'},
+      tickfont: {color: '#1b291e'},
       ticktext: ["0%", "5%", "10%", "15+%"]
     }
   }];
@@ -418,7 +418,7 @@ async function displaySkogDataOnMap() {
     colorbar: {
       title: "Produktiv skogsmark (%)",
       tickvals: [10, 30, 50, 70, 90, 100],
-      tickfont: {color: 'white'},
+      tickfont: {color: '#1b291e'},
       ticktext: ["0–20%", "20–40%", "40–60%","60–80%", "80–100%"]
     }
   }];
@@ -498,7 +498,7 @@ colorscale:  [
     colorbar: {
       title: "Skyddad Natur (%)",
     tickvals: [0, 5, 10, 15, 20, 25, 30],
-    tickfont: {color: 'white'},
+    tickfont: {color: '#1b291e'},
     ticktext: ["0%", "5%", "10%", "15%", "20%", "25%", "30%"]
     }
   }];
@@ -686,7 +686,7 @@ async function createtotalChart() {
     title: {
       display: true,
       text: 'Total andel i hela Sverige', 
-      color: '#000',
+      color: '#FFF',
       font: {
         size: 16
       }

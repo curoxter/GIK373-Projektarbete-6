@@ -35,6 +35,7 @@ nav {
   width: 100%;
   z-index: 1000;
   padding-right: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 nav ul {
@@ -121,6 +122,8 @@ nav a:hover {
 
 .headerContent {
   padding: 1rem;
+  background-color: var(--background-opaque);
+  border-radius: var(--border-radius);
 }
 
 h1, h2, h3 {
@@ -329,6 +332,9 @@ p .responsiveText{
   border-radius: 5px;
   box-shadow: 0 px 8 px 0 rgba(0,0,0, 0.2);
   padding: 3px 17px;
+}
+.infoBox {
+  width: 33%;
 }
 }
 
