@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="
-    https://cdn.jsdelivr.net/npm/bootstrap-grid-only@1.0.0/bootstrap.min.css
-    " rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <script src="https://cdn.plot.ly/plotly-3.0.1.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="styles.css">
     
@@ -14,25 +13,30 @@
 <body >
     <div id="contentContainer">
         <header>
-            <nav>
-            <div class="container">
-            <ul class="sidebar">
-                <li onclick="hideSidebar(event)"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FCFCFC"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                <li><a href="#explot">Bebyggelse</a></li>
-                <li><a href="#prodSkog">Produktiv skog</a></li>
-                <li><a href="#skyddNat">Skyddad natur</a></li>
-                <li><a href="#compare">Jämförelse</a></li>
-                <li><a href="#ref">Referenser</a></li>
-            </ul>
-
-            <ul>
-                <li class=" hideOnMobile"><a href="#explot">Bebyggelse</a></li>
-                <li class=" hideOnMobile"><a href="#prodSkog">Produktiv skog</a></li>
-                <li class=" hideOnMobile"><a href="#skyddNat">Skyddad natur</a></li>
-                <li class=" hideOnMobile"><a href="#compare">Jämförelse</a></li>
-                <li class=" hideOnMobile"><a href="#ref">Referenser</a></li>
-                <li class=" hamburgerIcon" onclick="showSidebar(event)"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FCFCFC"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
-            </ul>
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+              <div class="container">
+                <a class="navbar-brand" href="#">Grupp 6</a>
+                <!-- Toggle -->
+                <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Sidebar -->
+                <div class=" sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                  <div class="offcanvas-header text-white border-bottom">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Grupp 6</h5>
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item mx-2"><a href="#explot">Bebyggelse</a></li>
+                        <li class="nav-item mx-2"><a href="#prodSkog">Produktiv skog</a></li>
+                        <li class="nav-item mx-2"><a href="#skyddNat">Skyddad natur</a></li>
+                        <li class="nav-item mx-2"><a href="#compare">Jämförelse</a></li>
+                        <li class="nav-item mx-2"><a href="#ref">Referenser</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </nav>
             <div class="headerImage col-12">
                 <div class="headerContent col-xs-10">
@@ -40,7 +44,7 @@
                     <h3 class="infoHeader">Samspelet mellan naturskydd, skogsbruk och bebyggelse i Sverige</h3>
                 </div>
             </div>
-            </div>
+        </div>
         </header>
 
         <main class="container">

@@ -1,29 +1,25 @@
 :root {
-    --tan: #AA8F66;            /* Ljusbrun/beige */
-    --terracotta: #B9A288;        
-    --black-bean: #280003; 
-    --black: #000;
-    --white: #FCFCFC;          /* Vit */
-    --text-dark: var(--white);
-    --text-light: var(--black);
-    --background: #F2E8CF;     
-    --background-opaque: #28000330;     
-    --border-radius: 6px;
-    --shadow: 0 2px 6px rgba(40, 0, 3, 0.08);
+  --tan: #aa8f66; /* Ljusbrun/beige */
+  --terracotta: #b9a288;
+  --black-bean: #280003;
+  --black: #000;
+  --white: #fcfcfc; /* Vit */
+  --white-opaque: #fcfcfc20;
+  --text-dark: var(--white);
+  --text-light: var(--black);
+  --background: #f2e8cf;
+  --background-opaque: #28000330;
+  --border-radius: 6px;
+  --shadow: 0 2px 6px rgba(40, 0, 3, 0.08);
 }
-
-
 
 body {
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   color: var(--text-dark);
   background-color: var(--background);
-
 }
 
-
-
-nav {
+/* nav {
   background-color: var(--black-bean);
   position: fixed;
   top: 0;
@@ -88,13 +84,30 @@ nav a:hover {
 
 .hideOnMobile{
   display: none;
+} */
+
+nav {
+  background-color: var(--black-bean);
 }
-
-
+nav a {
+  text-decoration: none;
+  color: var(--white);
+  height: 100%;
+  font-size: 1rem;
+  padding: 10px 0;
+  display: block;
+  border-bottom: 1px solid var(--white-opaque);
+}
+nav a:hover {
+  color: var(--background);
+}
+.sidebar {
+  background-color: var(--black-bean);
+}
 
 /* Se till att bildbehållaren tar exakt 100% av fönsterbredden */
 .headerImage {
-  background-image: url('/Bild/trail-5726987_1280.jpg');
+  background-image: url("/Bild/trail-5726987_1280.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -107,7 +120,6 @@ nav a:hover {
   text-align: center;
   color: white;
   position: relative;
-
 }
 
 .headerContent {
@@ -116,7 +128,9 @@ nav a:hover {
   border-radius: var(--border-radius);
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 600;
   margin-bottom: 1rem;
   color: var(--white);
@@ -150,9 +164,6 @@ h2 {
   font-size: 1.1rem;
 } */
 
-
-
-
 .infoBox {
   background-color: var(--background-opaque);
   border-left: 4px solid var(--black-bean);
@@ -164,8 +175,6 @@ h2 {
   line-height: 1.7;
 }
 
-
-
 header {
   text-align: center;
   margin-bottom: 3rem;
@@ -174,16 +183,15 @@ header {
   position: relative;
 }
 
-
 header::before {
-/*  content: "GRUPP 6"; 
+  /*  content: "GRUPP 6"; 
   position: absolute; */
   top: 0;
   right: 0;
   background-color: var(--black-bean);
   color: var(--white);
-  padding: 8px 16px; 
-  border-radius: 20px; 
+  padding: 8px 16px;
+  border-radius: 20px;
   font-size: 0.8rem;
   letter-spacing: 1px;
   font-weight: 500;
@@ -196,7 +204,7 @@ footer {
   border-top: 1px solid var(--tan);
   color: var(--tan);
 }
- 
+
 section {
   margin: 1rem 0;
   position: relative;
@@ -258,15 +266,15 @@ section p {
 
 .chartContainer {
   position: relative;
-  width: 100%;           /* Full bredd av förälderelementet */
-  max-width: 370px;      /* Valfritt maxbredd */
-  height: 300px;         /* Styr höjden på grafen */
+  width: 100%; /* Full bredd av förälderelementet */
+  max-width: 370px; /* Valfritt maxbredd */
+  height: 300px; /* Styr höjden på grafen */
   padding: 1.5rem 0;
 }
 .linkStyle {
-  color:var(--black-bean);
+  color: var(--black-bean);
   margin: 20px 0;
-  padding-left: 17px; 
+  padding-left: 17px;
   display: block;
 }
 
@@ -278,19 +286,19 @@ section p {
   scroll-margin-top: 90px;
   background-color: var(--terracotta);
   border-radius: 5px;
-  box-shadow: 0 px 8 px 0 rgba(0,0,0, 0.2);
+  box-shadow: 0 px 8 px 0 rgba(0, 0, 0, 0.2);
   padding: 3px 17px;
 }
 
-.accordion{
+.accordion {
   max-width: 600px;
 }
 
-.accordion .contentBx{
+.accordion .contentBx {
   position: relative;
   padding: 10px;
 }
-.accordion .contentBx .label{
+.accordion .contentBx .label {
   position: relative;
   padding: 10px;
   background: var(--black-bean);
@@ -298,7 +306,7 @@ section p {
   cursor: pointer;
 }
 
-.accordion .contentBx .label::before{
+.accordion .contentBx .label::before {
   content: "+";
   position: absolute;
   top: 50%;
@@ -306,34 +314,28 @@ section p {
   transform: translateY(-50%);
 }
 
-.accordion .contentBx.active .label::before{
+.accordion .contentBx.active .label::before {
   content: "-";
 }
 
-.accordion .contentBx .content{
+.accordion .contentBx .content {
   position: relative;
-  background: #FCFCFC;
+  background: #fcfcfc;
   height: 0;
   overflow: hidden;
   transition: 0.5s;
   overflow-y: auto;
 }
 
-.accordion .contentBx.active .content{
+.accordion .contentBx.active .content {
   height: 150px;
   padding: 10px;
 }
 
 /* Make charts responsive */
 @media (min-width: 992px) {
-
-
-  .hideOnMobile{
-    display: flex;
-  }
-
-  .hamburgerIcon {
-    display: none;
+  nav a {
+    border-bottom: none;
   }
 
   .cardContent {
@@ -344,20 +346,15 @@ section p {
   .chartContainer {
     max-width: 600px;
     height: 600px;
-    
   }
   .chartContainerInv {
     height: 100%;
-    
   }
-.lodText{
-  display: flex;
+  .lodText {
+    display: flex;
+  }
+
+  p .responsiveText {
+    display: flex;
+  }
 }
-
-p .responsiveText{
-  display: flex;
-}
-
-
-}
-
