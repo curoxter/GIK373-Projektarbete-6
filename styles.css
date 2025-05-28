@@ -336,6 +336,7 @@ section p {
 @media (min-width: 992px) {
   nav a {
     border-bottom: none;
+    padding-inline-start: 1.5rem;
   }
 
   .cardContent {
