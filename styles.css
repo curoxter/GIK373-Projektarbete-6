@@ -17,6 +17,7 @@ body {
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   color: var(--text-dark);
   background-color: var(--background);
+  font-size: 14px;
 }
 
 /* nav {
@@ -98,6 +99,9 @@ nav a {
   display: block;
   border-bottom: 1px solid var(--white-opaque);
 }
+.navbar-brand {
+  border-bottom: none;
+}
 nav a:hover {
   color: var(--background);
 }
@@ -123,7 +127,7 @@ nav a:hover {
 }
 
 .headerContent {
-  padding: 1rem;
+  margin: 4rem;
   background-color: var(--background-opaque);
   border-radius: var(--border-radius);
 }
@@ -132,12 +136,11 @@ h1,
 h2,
 h3 {
   font-weight: 600;
-  margin-bottom: 1rem;
   color: var(--white);
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 1.5rem;
   text-align: center;
   line-height: 1.3;
   margin: 0;
@@ -146,15 +149,16 @@ h1 {
 }
 
 .infoHeader {
-  font-size: 20px;
   margin-top: 10px;
 }
 h2 {
-  font-size: 1.4rem;
-  margin-top: 2rem;
-  padding-bottom: 0.5rem;
-  color: var(--text-light);
-  margin-left: 18px;
+  font-size: 1.25rem;
+  color: var(--black-bean);
+  padding-left: 0.95rem;
+}
+
+h3 {
+  font-size: 1.1rem;
 }
 
 /* .subtitle {
@@ -177,24 +181,15 @@ h2 {
 
 header {
   text-align: center;
-  margin-bottom: 3rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--tan);
   position: relative;
 }
 
-header::before {
-  /*  content: "GRUPP 6"; 
-  position: absolute; */
-  top: 0;
-  right: 0;
-  background-color: var(--black-bean);
-  color: var(--white);
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  font-weight: 500;
+.chartContainer {
+  max-width: 600px !important;
+  display: block;
+  margin-bottom: 0.6rem;
 }
 
 footer {
@@ -204,12 +199,10 @@ footer {
   border-top: 1px solid var(--tan);
   color: var(--tan);
 }
-
-section {
-  margin: 1rem 0;
-  position: relative;
+.fakta {
+  list-style: none;
+  line-height: 1.7;
 }
-
 /* Stylish divider */
 section::after {
   content: "";
@@ -228,12 +221,13 @@ section:last-of-type::after {
 section p {
   font-size: 0.95rem;
   line-height: 1.7;
-  padding: 17px;
+  padding: 0.95rem;
   color: var(--text-light);
 }
 
 .kartor {
-  padding-top: 2.5rem;
+  padding-top: 2rem;
+  padding-left: 0.35rem;
   font-size: 8pt;
 }
 
@@ -257,20 +251,6 @@ section p {
   height: 500px;
 }
 
-.chartContainerInv {
-  position: relative;
-  max-width: 370px;
-  height: 550px;
-  padding: 1.5rem 0;
-}
-
-.chartContainer {
-  position: relative;
-  width: 100%; /* Full bredd av förälderelementet */
-  max-width: 370px; /* Valfritt maxbredd */
-  height: 300px; /* Styr höjden på grafen */
-  padding: 1.5rem 0;
-}
 .linkStyle {
   color: var(--black-bean);
   margin: 20px 0;
@@ -287,40 +267,46 @@ section p {
   background-color: var(--terracotta);
   border-radius: 5px;
   box-shadow: 0 px 8 px 0 rgba(0, 0, 0, 0.2);
-  padding: 3px 17px;
+  padding: 2rem;
 }
 
 .accordion {
   max-width: 600px;
+  border: 1px solid var(--background-opaque);
 }
 
 .accordion .contentBx {
   position: relative;
-  padding: 10px;
+  /*   padding: 10px; */
 }
 .accordion .contentBx .label {
   position: relative;
   padding: 10px;
   background: var(--black-bean);
   color: var(--text-dark);
-  cursor: pointer;
+  cursor: pointer; /* 
+  border-radius: var(--border-radius); */
 }
 
 .accordion .contentBx .label::before {
-  content: "+";
+  content: "▼";
   position: absolute;
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+  font-weight: 500;
+  font-size: large;
 }
 
 .accordion .contentBx.active .label::before {
-  content: "-";
+  content: "▲";
+  font-weight: 500;
+  font-size: large;
 }
 
 .accordion .contentBx .content {
   position: relative;
-  background: #fcfcfc;
+  background: #f9f9e6;
   height: 0;
   overflow: hidden;
   transition: 0.5s;
@@ -328,34 +314,37 @@ section p {
 }
 
 .accordion .contentBx.active .content {
-  height: 150px;
+  height: fit-content;
   padding: 10px;
 }
 
+/* .referenser {
+  margin-top: 3rem;
+}
+ */
 /* Make charts responsive */
 @media (min-width: 992px) {
   nav a {
     border-bottom: none;
     padding-inline-start: 1.5rem;
   }
-
-  .cardContent {
-    display: flex;
-    align-items: flex-end;
-    gap: 5rem;
+  h1 {
+    font-size: 2rem;
   }
-  .chartContainer {
-    max-width: 600px;
-    height: 600px;
+  h2 {
+    font-size: 1.5rem;
   }
-  .chartContainerInv {
-    height: 100%;
-  }
-  .lodText {
-    display: flex;
+  h3 {
+    font-size: 1.25rem;
   }
 
   p .responsiveText {
     display: flex;
+  }
+  section::after {
+    display: none;
+  }
+  .infoBox {
+    width: 60%;
   }
 }
