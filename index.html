@@ -48,18 +48,32 @@
         </header>
     </div>
         <main >
+            
             <div class="container cardContainer">
-<div class="row mb-lg-5 gx-lg-5 row-cols-1 row-cols-lg-2">
+<div class="row mb-xxl-5 mt-xxl-5 gx-xxl-5 mb-sm-5 mt-sm-5">
+        <section class="col-sm-12 col-xxl-6 mb-xxl-5">
             <div class="infoBox">
-            <p>Sverige är ett land rik på natur med livfyllda städer och vidsträckta skogar som lockar vandrare från hela världen. Men bakom denna vackra fasad döljer sig en komplex balansakt: hur fördelar vi egentligen vårt markområde mellan bebyggelse, produktiv skogsbruk och naturskydd?<br>
-            När städer växer och befolkning ökar behöver vi samtidigt mer skog. Blir markanvändningen en alltmer pressande fråga. Tar vi för mycket plats från naturen när vi bygger? Skyddar vi tillräckligt av våra värdefulla ekosystem? Hur mycket av våra skogar kan vi egentligen bruka hållbart? <br>
-            Genom interaktiva kartor och djupgående dataanalys utforskar vi Sveriges markfördelning och avslöjar mönster som få får se. Följ med på en resa genom data som visar hur Sverige hanterar den eviga konflikten mellan utveckling, bevarande och skydd. Upptäck vad sifforna egentligen berättar om vårt lands framtid. 
-             </p>
+                <h2>Sveriges markutmaning</h2>
+                <p>Sverige är ett land rik på natur med livfyllda städer och vidsträckta skogar som lockar vandrare från hela världen. Men bakom denna vackra fasad döljer sig en komplex balansakt: hur fördelar vi egentligen vårt markområde mellan bebyggelse, produktiv skogsbruk och naturskydd?<br><br>
+                När städer växer och befolkning ökar behöver vi samtidigt mer skog. <br>Blir markanvändningen en alltmer pressande fråga. Tar vi för mycket plats från naturen när vi bygger? Skyddar vi tillräckligt av våra värdefulla ekosystem? <br>Hur mycket av våra skogar kan vi egentligen bruka hållbart? <br><br>
+                Genom interaktiva kartor och djupgående dataanalys utforskar vi Sveriges markfördelning och avslöjar mönster som få får se. Följ med på en resa genom data som visar hur Sverige hanterar den eviga konflikten mellan utveckling, bevarande och skydd. Upptäck vad sifforna egentligen berättar om vårt lands framtid. 
+                </p>
             </div>
+        </section>
 
-        <section  class="col mt-lg-5 mb-lg-5 ">
+        <section class="pic col-sm-12 col-xxl-6 mt-xxl-5 mb-xxl-5">
+            <div class="logg h-100" style="min-height: 518px;">
+                <img src="/bild/log-cabin-1886620_1280.jpg" 
+                     class="h-100 w-100" 
+                     style="object-fit: cover; transform: translateY(-47px); border-radius: 5px;" 
+                     alt="Log Cabin in the forest" />
+            </div>
+        </section>
+
+        <section  class="col-sm-12 col-xxl-6 mb-xxl-5">
             <div class="card" id="explot">
-                <h2>Bebyggd mark</h2>                   
+                <h2>Bebyggd mark</h2>
+                <p class="infoBoxUnder">Kartan visar bebyggd mark i % per län (2020)</p>                   
                 <div class="kartor" id="byggStatistik"> </div>
                 <ul class="fakta">
                     <li>Den här interaktiva kartan visar bebyggdmark år 2020.</li>
@@ -76,21 +90,22 @@
                         </div>
                     </div>
                 </div>
-                                <div class="accordion">
+                                <!-- <div class="accordion">
                     <div class="contentBx">
                         <div class="label">Läs mer om bebyggd mark</div>
                         <div class="content">
                             <p> Diagram som visar utvecklingen av bebyggd mark år 2020. De numeriska värderna som representeras genom färgkodning har skalats ner då värderna är relativt låga i alla län. Diagrammet visar tydliga regionala skillnader i markanvänding. Stockholm har högst med 15% medans norra län som norrbotten enbart har 0.9%. Detta illustrerar hur befolkningstäthet och geografi påverkar markanvändsnings konflikten i vårt tilemma. Norrbotten kan ha mer outnyttjad mark på grund av konflikter mellan skogsbruk och naturskydd.  </p>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>   
         </section>
 
     
-        <section class="col mt-lg-5 mb-lg-5 ">
+        <section class="col-sm-12 col-xxl-6 mb-xxl-5">
             <div class="card" id="prodSkog">
                 <h2>Produktiv skogsmark</h2>
+                <p class="infoBoxUnder">Kartan visar produktiv skogsmark i % per län (2020)</p>
                     <div class="kartor" id="skogStatestik"></div>
                     <ul class="fakta">
                         <li>Kartan visar andel produktiv skogsmark år 2020 (inte total skogsvolym).</li>
@@ -120,11 +135,24 @@
                 
             </div>
         </section>
+      
 
+            <div class=" col-sm-12 col-xxl-4 mb-xxl-5 pe-xxl-3 mb-sm-5">
+                    <img src="/Bild/forestry-6596153_1280.jpg" class="img-fluid d-block w-100" alt="forest">
+            </div>
+        
+            <div class="col-sm-12 col-xxl-4 mb-xxl-5 pe-xxl-0 ps-xxl-0 mb-sm-5">
+                    <img src="/Bild/pexels-efrem-efre-2786187-28679846.jpg" class="img-fluid d-block w-100" alt="venue">
+            </div>
+        
+            <div class="col-sm-12 col-xxl-4 mb-xxl-5 ps-xxl-3 mb-sm-5">
+                    <img src="/Bild/pexels-forsjonathan-5234151.jpg" class="img-fluid d-block w-100" alt="venue2">
+            </div>
 
-        <section  class="col mb-lg-5">
+        <section  class="col-sm-12 col-xxl-6 mb-xxl-5">
             <div class="card" id="skyddNat">
             <h2>Skyddad natur</h2>
+            <p class="infoBoxUnder">Kartan visar skyddad natur i % per län (2020)</p>
                     <div class="kartor" id="hektarStatistik"></div>
                     <ul class="fakta">
                         <li> Kartan visar regionala skillnader i fördelning av skyddad natur genom Sveriges landskap.</li>
@@ -148,9 +176,10 @@
             </div>
         </section>
 
-        <section class="col mb-lg-5 mb-sm-5">
+        <section class="col-sm-12 col-xxl-6">
             <div class="card" id="compare">
                 <h2>Jämförelse</h2>
+                <p class="infoBoxUnder">Diagrammet sammanställer datan från kartorna i % per län (2020)</p>
                     <div class="chartContainer">
                         <canvas id="compareChart"></canvas>
                     </div>
