@@ -55,15 +55,15 @@
             <div class="infoBox">
                 <img src="/Bild/log-cabin-1886620_1280.jpg">
                 <div class="infoText">
-                <h3>Introduktuion</h3>
+                <h3>Introduktion</h3>
                 <p>Sverige är ett land rik på natur med livfyllda städer och vidsträckta skogar som lockar vandrare från hela världen. 
                 Men bakom denna vackra fasad döljer sig en komplex balansakt: hur fördelar vi egentligen vårt markområde mellan 
-                bebyggelse, produktivt skogsbruk och naturskydd?<br><br>
-                Skogsbruk ger oss nödvändiga resurser, men samtidigt behövs naturskydd. Markanvändningen blir en alltmer pressande fråga. 
+                bebyggelse, produktiv skogsmark och naturskydd?<br><br>
+                Skogsmark ger oss nödvändiga resurser, men samtidigt behövs naturskydd. Markanvändningen blir en alltmer pressande fråga. 
                 Tar vi för mycket plats från naturen när vi bygger? Skyddar vi tillräckligt av våra värdefulla ekosystem? Hur mycket av 
                 våra skogar kan vi egentligen bruka hållbart? <br><br>
                 Genom interaktiva kartor och djupgående dataanalys utforskar vi Sveriges markfördelning och ser om det finns några mönster. 
-                Följ med på en resa genom data som visar hur Sverige hanterar den eviga konflikten mellan utveckling, bevarande och skydd. 
+                Följ med på en resa genom data som visar hur Sverige hanterar den eviga konflikten mellan utveckling, utvinning och bevarande. 
                 Upptäck vad sifforna berättar om vårt lands markfördelning. 
                 </p>
             </div>
@@ -79,7 +79,7 @@
                         <canvas id="compareChart"></canvas>
                     </div>
                     <ul class="fakta">
-                        <li>Norrbotten har över 24 % skyddad natur - Skåne bara 5 %.</li>
+                        <li>Norrbotten har över 24 % skyddad natur - Skåne har 3,7 %.</li>
                         <li>Stockholm har mer skyddad natur än många tror.</li>
                         <li>Bebyggelse tar upp ca 3 % av hela Sverige.</li>
                         <li>Största andelen markanvändning är produktiv skogsmark.</li>
@@ -89,16 +89,16 @@
                         <div class="contentBx">
                             <div class="label">Läs mer</div>
                             <div class="content">
-                                <p> Som vi kan se så går ingen utav staplarna upp till 100 %, det beror på att våra län består av
+                                <p> Som vi kan se går ingen utav staplarna upp till 100 %, det beror på att våra län består av
                                     mycket mer än just de tre variabler som är inkluderade i denna undersökning. Ett exempel är Skåne, 
                                     vilket är ett av länen med lägst procent för dessa områden, det beror mycket möjligt på att det är 
                                     väldigt rikt på jordbruk. Sen finns det även andra marktyper som vatten (stora sjöar ej inkluderade), 
-                                    golfbanor, infrastruktur (vägar, järnvägar mm.) och fjäll med mera. Men det är tydligt att vårt land 
+                                    golfbanor och fjäll mm. Men det är tydligt att vårt land 
                                     består till väldigt stor del av skog och förvånansvärt lite bebyggelse. <br><br>
 
-                                    Frågan är då: kan vi skydda, bruka och bygga? Det korta enkla svaret är: ja det kan vi. <br><br>
+                                    Frågan är då: kan vi skydda, bruka och bygga? Det korta enkla svaret är: Ja det kan vi. <br><br>
 
-                                    Går vi in på djupet finns det en obalans i flera delar av landet när det kommer till skyddad natur. 
+                                    Går vi in på djupet finns det dock en obalans i flera delar av landet när det kommer till skyddad natur. 
                                     Målet är att år 2030 ska 30 % av vår mark vara skyddad, vilket är långt ifrån våra 12 % (endast landareal) 
                                     år 2020. Från 2020–2024 har det inte ökat mycket, det ligger på ca 15 % (då vattenareal är inkluderat), 
                                     vilket måste dubblas på 6 år om vi ska nå målet (Riksdagen, 2024). Det är möjligt att vi når målet men 
@@ -119,7 +119,7 @@
                 <p class="infoBoxUnder">Kartan visar bebyggd mark i procent per län (2020)</p>                   
                 <div class="kartor" id="byggStatistik"> </div>
                 <ul class="fakta">
-                    <li>Färgskalan visar värden från 0-15 %.</li>
+                    <li>Färgskalan visar värden från 0–15 %.</li>
                     <li>Stockholm har högst bebyggdmark med 15 %.</li>
                     <li>Norrbotten har lägst med 0,9 % bebyggdmark.</li>
                     <li>Olika regioner har olika utmaningar i markanvändningskonflikten.</li>
@@ -128,7 +128,8 @@
                     <div class="contentBx">
                         <div class="label">Läs mer om bebyggd mark</div>
                         <div class="content">
-                            <p> Bebyggelse mäter andelen mark som är urbaniserad och utvecklad för mänskligt boende. 
+                            <p> Bebyggd mark inkluderar byggnader samt tillhörande mark (trädgårdar, parkering mm.), anläggningar för olika 
+                                verksamheter och olika typer av transportinfrastruktur (vägar, hamnar och flygplatser mm.). 
                                 Bednarz förklarar i sin artikel varför olika aktiviteter lokaliseras på specifika platser. 
                                 Han påstår att markanvändningen inte är slumpmässig utan resultatet av ekonomiska beslut från individer,
                                 företag och regeringar som strävar efter högsta ekonomiska avkastning. Detta koncept bygger på Johann 
@@ -248,7 +249,8 @@
                 Skyddad natur i Norrbotten är beräknat som ett exempel genom att ta den del skyddad natur i Norrbotten i hektar 
                 landareal delat med samma läns storlek i hektar landareal. Resultatet visar hur stor andel av länets yta som består
                  av skyddad natur i procent. Samma metod har tillämpats på alla län och för samtliga tre variabler. <br><br>
-                 Normalisering möjliggör rättvis jämförelse och gör det enklare att se vad som skulle ha döljts av geografiska storleksskillnader. Detta gör det möjligt att identifiera vilka län som prioterar vissa typer av markanvändning.
+                 Normalisering möjliggör rättvis jämförelse och gör det enklare att se vad som skulle ha döljts av geografiska 
+                 storleksskillnader. Detta gör det möjligt att identifiera vilka län som prioterar vissa typer av markanvändning.
                 </p>
 
                 <p>
@@ -284,9 +286,9 @@
             <div class="referenser" id="ref">
                 <h3 class="referensH2">Referenser</h3>
                 <p>Data hämtad från [2025-05-20]:</p>
-        <a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__BE__BE0101__BE0101A/BefolkManad/table/tableViewLayout1/" class="linkStyle">SCB invånare</a>
+        <a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__MI__MI0803__MI0803A/MarkanvBebyggdLnKnN/" class="linkStyle">SCB Bebyggd och anlagd mark efter regiion och markanvändningsklass. Vart 5:e år 2010 – 2020.</a>
         <a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__MI__MI0603__MI0603D/SkyddadnaturN/" class="linkStyle">SCB Nationalparker, naturreservat, naturvårdsområden, biotopsskyddsområden, efter region. År 1998-2024 </a>         
-        <a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__MI__MI0810__MI0810B/BefTatortBostTyp/" class="linkStyle">SCB Befolkning i tätorder efter typ av bostad, per tätort. År 2000-2020 </a>         
+        <a href="https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0802/Areal2012NN" class="linkStyle">SCB Hektar efter region och år. År 2012-2024 </a>         
         <a href="https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__MI__MI0803__MI0803A/MarkanvJbSkN/" class="linkStyle">SCB Jordbruksmark och skogsmark efter region och markanvändsningklass. År 1951-2020 </a>     
             <p class="referens">Vi har visualiserat via Plotly och Chart.js</p>
             <p class="referens">Bjelke, U., Sundberg, S., & Wikberg, S. (2021, 17 juni). Den skyddade naturen i Sverige är skevt fördelad. Sveriges lantbruksuniversitet. https://www.slu.se/artdatabanken/arter-och-natur/Dagens-natur/den-skyddade-naturen-i-sverige-ar-skevt-fordelad/</p>
