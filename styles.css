@@ -20,9 +20,10 @@ body {
   font-size: 14px;
 }
 
-.referens{
-  margin-top:-20px;
-  margin-bottom: -20px;}
+.referens {
+  margin-top: -20px;
+  margin-bottom: -20px;
+}
 nav {
   background-color: var(--black-bean);
 }
@@ -45,13 +46,12 @@ nav a:hover {
   background-color: var(--black-bean);
 }
 
-/* Se till att bildbehållaren tar exakt 100% av fönsterbredden */
 .headerImage {
   background-image: url("/Bild/trail-5726987_1280.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 50vh; /* justera efter behov */
+  height: 50vh;
   min-height: 300px;
   width: 100%;
   display: flex;
@@ -89,7 +89,6 @@ h1 {
   position: relative;
 }
 
-
 h2 {
   font-size: 1.25rem;
   font-weight: 500;
@@ -101,10 +100,9 @@ h3 {
   padding-left: 0.95rem;
 }
 
-
 .infoBox {
   background-color: var(--terracotta);
-  border-radius: var(--border-radius) ;
+  border-radius: var(--border-radius);
   margin-top: 0;
   overflow: hidden;
   box-shadow: 2px 2px 10px var(--background-opaque);
@@ -122,7 +120,7 @@ h3 {
   font-size: 0.95rem;
   line-height: 1.7;
 }
-.infoBoxUnder{
+.infoKartor {
   padding-top: 0;
   padding-bottom: 0;
   margin-bottom: 0;
@@ -243,21 +241,20 @@ section p {
   padding: 10px;
 }
 
-
-.fraction {
+.beräkning {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
   margin: 0 5px;
 }
 
-.fraction .top {
+.beräkning .topp {
   display: block;
   border-bottom: 1px solid #000;
   padding: 0 5px;
 }
 
-.fraction .bottom {
+.beräkning .botten {
   display: block;
   padding: 0 5px;
 }
@@ -288,14 +285,11 @@ section p {
     max-height: 519px !important;
   }
 
-
-
-.navbar-brand {
-  border-bottom: none;
-  margin-left: -25px ;
-}
-.navbar-nav {
-  margin-right: -16px;
-}
-
+  .navbar-brand {
+    border-bottom: none;
+    margin-left: -25px;
+  }
+  .navbar-nav {
+    margin-right: -16px;
+  }
 }

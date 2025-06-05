@@ -113,10 +113,10 @@ const landYtaQuery = {
   },
 };
 
-//skyddad natur hektar
-const hektarUrl =
-  "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/SkyddadnaturN";
-const hektarQuery = {
+//skyddad natur skyddad
+const skyddadUrl =
+  "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/MI/MI0603/MI0603D/skyddadnaturN";
+const skyddadQuery = {
   query: [
     {
       code: "Region",
@@ -420,10 +420,10 @@ async function displaySkogDataOnMap() {
 displaySkogDataOnMap();
 
 //Karta över skyddad natur
-async function calculateHektarData() {
-  const hektarData = await fetch(hektarUrl, {
+async function calculateSkyddadData() {
+  const skyddadData = await fetch(skyddadUrl, {
     method: "POST",
-    body: JSON.stringify(hektarQuery),
+    body: JSON.stringify(skyddadQuery),
   }).then((res) => res.json());
 
   const landYtaData = await fetch(landYtaUrl, {
@@ -431,7 +431,7 @@ async function calculateHektarData() {
     body: JSON.stringify(landYtaQuery),
   }).then((res) => res.json());
 
-  const hektar = hektarData.data.map((item) => ({
+  const skyddad = skyddadData.data.map((item) => ({
     region: item.key[0],
     value: parseFloat(item.values[0]),
   }));
@@ -441,7 +441,7 @@ async function calculateHektarData() {
     area: parseFloat(item.values[0]),
   }));
 
-  const result = hektar.map((item) => {
+  const result = skyddad.map((item) => {
     const regionName = regionCodes[item.region];
     const yta = landYta.find((l) => l.region === item.region)?.area;
     const procent = (item.value / yta) * 100;
@@ -456,8 +456,8 @@ async function calculateHektarData() {
     values: result.map((r) => r.value),
   };
 }
-async function displayHektarDataOnMap() {
-  const mapData = await calculateHektarData();
+async function displaySkyddadDataOnMap() {
+  const mapData = await calculateSkyddadData();
 
   const data = [
     {
@@ -476,7 +476,7 @@ async function displayHektarDataOnMap() {
         [1.0, "#4F6039"],
       ],
       colorbar: {
-        title: "Skyddad Natur (%)",
+        title: "skyddad Natur (%)",
         tickvals: [0, 5, 10, 15, 20, 25, 30],
         tickfont: { color: "#000" },
         ticktext: ["0%", "5%", "10%", "15%", "20%", "25%", "30%"],
@@ -493,10 +493,10 @@ async function displayHektarDataOnMap() {
     plot_bgcolor: "rgba(0,0,0,0)",
   };
 
-  Plotly.newPlot("hektarStatistik", data, layout, { displayModeBar: false });
+  Plotly.newPlot("skyddadStatistik", data, layout, { displayModeBar: false });
 }
 
-displayHektarDataOnMap();
+displaySkyddadDataOnMap();
 
 /* 
 
@@ -515,16 +515,16 @@ function hideSidebar(event) {
 //diagram för alla kartor med län
 
 async function createCompareChart() {
-  const [byggData, skogData, hektarData] = await Promise.all([
+  const [byggData, skogData, skyddadData] = await Promise.all([
     fetch(byggUrl, { method: "POST", body: JSON.stringify(byggQuery) }).then(
       (res) => res.json()
     ),
     fetch(skogUrl, { method: "POST", body: JSON.stringify(skogQuery) }).then(
       (res) => res.json()
     ),
-    fetch(hektarUrl, {
+    fetch(skyddadUrl, {
       method: "POST",
-      body: JSON.stringify(hektarQuery),
+      body: JSON.stringify(skyddadQuery),
     }).then((res) => res.json()),
   ]);
 
@@ -558,7 +558,7 @@ async function createCompareChart() {
 
   const bygg = procentData(byggData, "bygg");
   const skog = procentData(skogData, "skog");
-  const skydd = procentData(hektarData, "skydd");
+  const skydd = procentData(skyddadData, "skydd");
 
   // Kombinera per region
   const combined = {};
@@ -604,7 +604,7 @@ async function createCompareChart() {
           backgroundColor: "#765664",
         },
         {
-          label: "Skyddad natur (%)",
+          label: "skyddad natur (%)",
           data: skyddArr,
           backgroundColor: "#7E985F",
         },
@@ -644,7 +644,7 @@ async function createCompareChart() {
 
 createCompareChart();
 
-//accordian shit
+//accordion
 
 const accordions = document.querySelectorAll(".accordion .contentBx");
 
